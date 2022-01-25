@@ -11,6 +11,10 @@ const register = ({ name, email, password }) => {
     // Email Validation
 
     // Password Validation
+    const passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    if (!password.match(passw)) {
+      throw { message: "Password validation error", status: 400 };
+    }
 
     users.push({ name, email, password });
     return {
@@ -27,7 +31,7 @@ const register = ({ name, email, password }) => {
 response = register({
   name: "Shekhar",
   email: "varun@gmail.com",
-  password: "Varun@123",
+  password: "Qwerty@!12344",
 });
 
 // Name must be more than 5 char
