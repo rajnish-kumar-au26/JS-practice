@@ -9,6 +9,13 @@ const register = ({ name, email, password }) => {
     }
 
     // Email Validation
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (!email.match(mailformat)) {
+      throw {
+        message: "You have entered an invalid email address!",
+        status: 400,
+      };
+    }
 
     // Password Validation
     const passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
@@ -21,7 +28,7 @@ const register = ({ name, email, password }) => {
       message: "User added successfully",
       status: 200,
       error: false,
-      data: users,
+      // data: users,
     };
   } catch (error) {
     return { message: error.message, status: error.status, error: true };
@@ -29,9 +36,9 @@ const register = ({ name, email, password }) => {
 };
 
 response = register({
-  name: "Shekhar",
+  name: "varun",
   email: "varun@gmail.com",
-  password: "Qwerty@!12344",
+  password: "Varun@123",
 });
 
 // Name must be more than 5 char
