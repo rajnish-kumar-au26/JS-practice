@@ -115,10 +115,29 @@ response = login({
 // console.log(response);
 
 // get users by limit and offset
-// const GetData = ({limit,offset})=>{
-//   try{
-//     const userDatalen = userData.length
 
-//     if(us)
-//   }
-// }
+const GetData = (limit = 10, offset = 1) => {
+  try {
+    const last = limit * offset;
+    const start = limit * (offset - 1);
+    const data = userData.slice(start, last);
+    if (!data.length) {
+      throw { message: "user not found", status: 400, error: true };
+    }
+    return {
+      message: "sucess",
+      status: 200,
+      error: false,
+      data: { data: data, count: userData.length },
+    };
+  } catch (error) {
+    return {
+      message: error.message,
+      status: error.status,
+      error: true,
+    };
+  }
+};
+
+response = GetData(10, 2);
+console.log(response);
