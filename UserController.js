@@ -5,7 +5,7 @@ const register = ({ name, email, password }) => {
   try {
     // Name Validation
     if (name.length < 5) {
-      throw { message: 'Name must be more than 5 char', status: 400 };
+      throw { message: "Name must be more than 5 char", status: 400 };
     }
 
     // Email Validation
@@ -14,7 +14,7 @@ const register = ({ name, email, password }) => {
 
     users.push({ name, email, password });
     return {
-      message: 'User added successfully',
+      message: "User added successfully",
       status: 200,
       error: false,
       data: users,
@@ -25,9 +25,9 @@ const register = ({ name, email, password }) => {
 };
 
 response = register({
-  name: 'varu',
-  email: 'varun@gmail.com',
-  password: 'Varun@123',
+  name: "Shekhar",
+  email: "varun@gmail.com",
+  password: "Varun@123",
 });
 
 // Name must be more than 5 char
@@ -35,4 +35,4 @@ response = register({
 // Password must contains 1 numeric, 1Uppercase, and more than 8 char
 
 // console.log(users);
-console.log('errorMessage', response);
+console.log("errorMessage", response);
