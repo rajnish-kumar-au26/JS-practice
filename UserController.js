@@ -9,7 +9,7 @@ let response = {};
 
 const register = ({ name, email, password }) => {
   try {
-    // Name Validation
+    //   Name Validation
     if (name.length < 5) {
       throw { message: "Name must be more than 5 char", status: 400 };
     }
@@ -106,8 +106,13 @@ const login = ({ email, password }) => {
 };
 
 response = login({
+<<<<<<< HEAD
   email: "varun@gmail.com",
   password: "Varun@123",
+=======
+  email: 'subu@gmail.com',
+  password: 'Subuhld@123',
+>>>>>>> 670c3c3f154f75254f2736e0aa5e57aba28a87fd
 });
 
 console.log(response);
