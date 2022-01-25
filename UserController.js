@@ -1,4 +1,10 @@
-const users = [];
+const users = [
+  {
+    name: 'subu haldar',
+    email: 'subu@gmail.com',
+    password: 'Subuhld@123',
+  },
+];
 let response = {};
 
 const register = ({ name, email, password }) => {
@@ -40,23 +46,33 @@ const register = ({ name, email, password }) => {
   }
 };
 
-response = register({
-  name: 'varun',
-  email: 'varun@gmail.com',
-  password: 'Varun@123',
-});
+function getUserByEmail({ email }) {
+  try {
+    let getUser = users.filter((user) => user.email === email);
+    if (!getUser.length) {
+      throw { status: 400, message: 'user is not found' };
+    }
+    return {
+      message: 'User found successfully',
+      status: 200,
+      error: false,
+      data: getUser[0],
+    };
+  } catch (error) {
+    return {
+      message: error.message,
+      status: error.status ? error.status : 400,
+      error: true,
+    };
+  }
+}
 
-console.log('errorMessage', response);
+// response = register({
+//   name: 'subu haldar',
+//   email: 'subu@gmail.com',
+//   password: 'Subuhld@123',
+// });
 
-response = register({
-  name: 'varun',
-  email: 'varun@gmail.com',
-  password: 'Varun@123',
-});
+response = getUserByEmail({ email: 'subu@gmail.com' });
 
-// Name must be more than 5 char
-// Email must be valid
-// Password must contains 1 numeric, 1Uppercase, and more than 8 char
-
-console.log(users);
-console.log('errorMessage', response);
+console.log(response);
