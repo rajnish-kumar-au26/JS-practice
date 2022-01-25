@@ -130,7 +130,8 @@ const offset = 2;
 
 // console.log(pagination());
 
-const UpdateUser = (email, { name, password }) => {
+// update user
+const UpdateUser = ({ email, name, password }) => {
   try {
     // name validation
     if (name.length < 5) {
@@ -157,14 +158,15 @@ const UpdateUser = (email, { name, password }) => {
       error: false,
     };
   } catch (error) {
-    return { message: error.message, status: error.status, error: error.error };
+    return { message: error.message, status: error.status, error: true };
   }
 };
 
 const NewName = "shubhankar";
-const NewPassword = "Rajni@12";
+const NewPassword = "Shubh@123456";
 
-response = UpdateUser("subu@gmail.com", {
+response = UpdateUser({
+  email: "subu@gmail.com",
   name: NewName,
   password: NewPassword,
 });
