@@ -9,6 +9,13 @@ const register = ({ name, email, password }) => {
     }
 
     // Email Validation
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (!email.match(mailformat)) {
+      throw {
+        message: 'You have entered an invalid email address!',
+        status: 400,
+      };
+    }
 
     // Password Validation
 
@@ -17,7 +24,7 @@ const register = ({ name, email, password }) => {
       message: 'User added successfully',
       status: 200,
       error: false,
-      data: users,
+      // data: users,
     };
   } catch (error) {
     return { message: error.message, status: error.status, error: true };
@@ -25,7 +32,7 @@ const register = ({ name, email, password }) => {
 };
 
 response = register({
-  name: 'varu',
+  name: 'varun',
   email: 'varun@gmail.com',
   password: 'Varun@123',
 });
