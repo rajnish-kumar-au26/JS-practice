@@ -171,5 +171,3 @@ response = UpdateUser({
   password: NewPassword,
 });
 console.log(response);
-
-console.log("after changed the password and email", users);
