@@ -8,11 +8,6 @@ const register = ({ name, email, password }) => {
       throw { message: "Name must be more than 5 char", status: 400 };
     }
 
-    // Email Validation
-    if (email.length < 5) {
-      throw { email: "email must be more than 5 char", status: 400 };
-    }
-
     // Password Validation
 
     users.push({ name, email, password });
@@ -20,7 +15,7 @@ const register = ({ name, email, password }) => {
       message: "User added successfully",
       status: 200,
       error: false,
-      data: users,
+      // data: users,
     };
   } catch (error) {
     return { message: error.message, status: error.status, error: true };
@@ -28,9 +23,44 @@ const register = ({ name, email, password }) => {
 };
 
 response = register({
-  name: "varu",
+  name: "varun",
   email: "varun@gmail.com",
   password: "Varun@123",
 });
 
-console.log("errorMessage", response);
+// login function
+const login = ({ email, password }) => {
+  try {
+    // email validation
+    const isEmail = users.filter((user) => user.email === email);
+    if (!isEmail.length) {
+      throw { message: "email id not register", status: "400" };
+    }
+
+    // password validation
+    if (isEmail[0].password != password) {
+      throw { message: "incorrect password", status: "400" };
+    }
+
+    const token = "jyjtcux646rx76cry";
+    return {
+      message: "User successfully logged in",
+      status: 200,
+      error: false,
+      data: { token: token },
+    };
+  } catch (error) {
+    return {
+      message: error.message,
+      status: error.status,
+      error: true,
+    };
+  }
+};
+
+response = login({
+  email: "varun@gmail.com",
+  password: "Varun@123",
+});
+
+console.log(response);
