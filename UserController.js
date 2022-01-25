@@ -75,4 +75,39 @@ function getUserByEmail({ email }) {
 
 response = getUserByEmail({ email: 'subu@gmail.com' });
 
+// login function
+const login = ({ email, password }) => {
+  try {
+    // email validation
+    const isEmail = users.filter((user) => user.email === email);
+    if (!isEmail.length) {
+      throw { message: 'email id not register', status: '400' };
+    }
+
+    // password validation
+    if (isEmail[0].password != password) {
+      throw { message: 'incorrect password', status: '400' };
+    }
+
+    const token = 'jyjtcux646rx76cry';
+    return {
+      message: 'User successfully logged in',
+      status: 200,
+      error: false,
+      data: { token: token },
+    };
+  } catch (error) {
+    return {
+      message: error.message,
+      status: error.status,
+      error: true,
+    };
+  }
+};
+
+response = login({
+  email: 'varun@gmail.com',
+  password: 'Varun@123',
+});
+
 console.log(response);
