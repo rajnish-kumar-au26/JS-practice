@@ -11,7 +11,7 @@ let response = {};
 
 const register = ({ name, email, password }) => {
   try {
-    // Name Validation
+    //   Name Validation
     if (name.length < 5) {
       throw { message: "Name must be more than 5 char", status: 400 };
     }
