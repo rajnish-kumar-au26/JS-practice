@@ -106,8 +106,8 @@ const login = ({ email, password }) => {
 };
 
 response = login({
-  email: 'varun@gmail.com',
-  password: 'Varun@123',
+  email: 'subu@gmail.com',
+  password: 'Subuhld@123',
 });
 
 console.log(response);
