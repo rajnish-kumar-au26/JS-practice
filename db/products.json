@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": "09f07ec8-dccb-4411-899e-d91951424ae3",
+    "name": "neachi-new",
+    "description": "titan watch",
+    "price": "500",
+    "image": "imagelink",
+    "date": "2022-01-26T10:52:25.964Z"
+  },
+  {
+    "id": "ba6ba3c4-6e0f-4a27-a2df-26b4d2d4c4a6",
+    "name": "tata",
+    "description": "tata watch",
+    "price": "5000",
+    "image": "tataimagelink",
+    "date": "2022-01-26T10:52:54.383Z"
+  }
+]
