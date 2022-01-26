@@ -1,7 +1,8 @@
 const users = require("../db/users.json");
+const bcrypt = require("bcryptjs");
 
 class UserService {
-  register = ({ name, email, password }) => {
+  register = async ({ name, email, password }) => {
     try {
       //   Name Validation
       if (name.length < 5) {
@@ -27,8 +28,10 @@ class UserService {
       if (findUser.length) {
         throw { message: "Email already exist", status: 400 };
       }
-
-      users.push({ name, email, password });
+      const tt = await bcrypt.hash(password, 10);
+      console.log(tt);
+      users.push({ name, email, password: tt });
+      // console.log(users);
       return {
         message: "User added successfully",
         status: 200,
