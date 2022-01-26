@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": "981dea54-129d-47e5-9c75-f2f1e7afa508",
+    "name": "Varun",
+    "email": "shekharbtn@gmail.com",
+    "password": "$2a$10$9M7drzBLiNEZSoBNl/Qr4euiJU1TIeeSzPd83lrGhHVY2cJmX4z8G"
+  },
+  {
+    "id": "3a492980-df2e-4d10-84a3-e042c7805ef4",
+    "name": "Rajnish Kumar",
+    "email": "rajnishkumar@gmail.com",
+    "password": "$2a$10$9J6uKMW92Ld4RdjvOm2SOe67VzCjEkiKZlUmT71EmgyVXGUMAhpCu"
+  }
+]

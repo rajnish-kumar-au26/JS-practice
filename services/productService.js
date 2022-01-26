@@ -1,9 +1,9 @@
-const products = require("../db/products.json");
-const { v4 } = require("uuid");
-const fs = require("fs");
-const path = require("path");
-let reqPath = path.join(__dirname, "../db/products.json");
-const RESPONSES = require("../responses/constantResponses");
+const products = require('../db/products.json');
+const { v4 } = require('uuid');
+const fs = require('fs');
+const path = require('path');
+let reqPath = path.join(__dirname, '../db/products.json');
+const RESPONSES = require('../responses/constantResponses');
 
 class ProductsService {
   addProduct = async ({ name, description, price, image }) => {
@@ -11,7 +11,7 @@ class ProductsService {
       //   Name Validation
       if (!name.length) {
         throw {
-          message: "Name must be required",
+          message: Messages.PRODUCTS.ADD_PRODUCT.NAME_VALIDATION,
           status: RESPONSES.BAD_REQUEST,
           error: true,
         };
@@ -20,7 +20,7 @@ class ProductsService {
       //   Description Validation
       if (!description.length) {
         throw {
-          message: "Description must be required",
+          message: Messages.PRODUCTS.ADD_PRODUCT.DESCRIPTION_VALIDATION,
           status: RESPONSES.BAD_REQUEST,
           error: true,
         };
@@ -29,7 +29,7 @@ class ProductsService {
       //   Price Validation
       if (!price.length) {
         throw {
-          message: "Price must be required",
+          message: Messages.PRODUCTS.ADD_PRODUCT.PRICE_VALIDATION,
           status: RESPONSES.BAD_REQUEST,
           error: true,
         };
@@ -38,7 +38,7 @@ class ProductsService {
       //Image Validation
       if (!image.length) {
         throw {
-          message: "Image must be required",
+          message: Messages.PRODUCTS.ADD_PRODUCT.IMAGE_VALIDATION,
           status: RESPONSES.BAD_REQUEST,
           error: true,
         };
@@ -48,7 +48,7 @@ class ProductsService {
       //   console.log(findProductTitle);
       if (findProductTitle.length) {
         throw {
-          message: "Title name is already exists",
+          message: Messages.PRODUCTS.ADD_PRODUCT.IS_REGISTER,
           status: RESPONSES.BAD_REQUEST,
           error: true,
         };
@@ -71,7 +71,7 @@ class ProductsService {
       });
       //   console.log(productDetails);
       return {
-        message: "Product added successfully",
+        message: Messages.PRODUCTS.ADD_PRODUCT.SUCCESS,
         status: RESPONSES.SUCCESS,
         error: false,
         // data: productDetails,
@@ -86,7 +86,7 @@ class ProductsService {
       //   productID Validation
       if (!productID.length) {
         throw {
-          message: "ProductID must be required",
+          message: Messages.PRODUCTS.UPDATE_PRODUCT.ID_VALIDATION,
           status: RESPONSES.BAD_REQUEST,
           error: true,
         };
@@ -97,7 +97,7 @@ class ProductsService {
       //   console.log(findProductByID);
       if (!findProductByID.length) {
         throw {
-          message: "ProductID  is not Found",
+          message: Messages.PRODUCTS.UPDATE_PRODUCT.PRODUCT_ID_VALIDATION,
           status: RESPONSES.BAD_REQUEST,
           error: true,
         };
@@ -136,7 +136,7 @@ class ProductsService {
         }
       });
       return {
-        message: "Product Updated successfully",
+        message: Messages.PRODUCTS.UPDATE_PRODUCT.SUCCESS,
         status: RESPONSES.SUCCESS,
         error: false,
       };
@@ -150,7 +150,7 @@ class ProductsService {
       let index = products.findIndex((user) => user.id == productID);
       if (index == -1) {
         throw {
-          message: "Id is Not Found",
+          message: Messages.PRODUCTS.DELETE_PRODUCT.ID_VALIDATION,
           status: RESPONSES.BAD_REQUEST,
           error: true,
         };
@@ -162,7 +162,7 @@ class ProductsService {
         }
       });
       return {
-        message: "Product Deleted successfully",
+        message: Messages.PRODUCTS.DELETE_PRODUCT.SUCCESS,
         status: RESPONSES.SUCCESS,
         error: false,
       };
@@ -176,13 +176,13 @@ class ProductsService {
       let getData = products.filter((product) => product.id === productID);
       if (!getData.length) {
         throw {
-          message: "Id is Not Found",
+          message: Messages.PRODUCTS.GET_PRODUCT.ID_VALIDATION,
           status: RESPONSES.BAD_REQUEST,
           error: true,
         };
       }
       return {
-        message: "Product GET successfully",
+        message: Messages.PRODUCTS.GET_PRODUCT.SUCCESS,
         status: RESPONSES.SUCCESS,
         error: false,
         data: getData[0],
@@ -195,13 +195,16 @@ class ProductsService {
   getAllProduct = async (offset = 1, limit = 10) => {
     try {
       if (!products.length) {
-        throw { message: "data not found", status: RESPONSES.SUCCESS };
+        throw {
+          message: Messages.PRODUCTS.GET_ALL_PRODUCT.DATA_VALIDATION,
+          status: RESPONSES.SUCCESS,
+        };
       }
       let end = limit * offset;
       let start = end - limit;
       let data = products.slice(start, end);
       return {
-        message: "get user succesfully",
+        message: Messages.PRODUCTS.GET_ALL_PRODUCT.SUCCESS,
         status: RESPONSES.SUCCESS,
         error: false,
         data: { count: products.length, rows: data },
