@@ -1,4 +1,5 @@
 const products = require('../db/products.json');
+const Messages = require('../messages/index');
 const { v4 } = require('uuid');
 const fs = require('fs');
 const path = require('path');
@@ -9,13 +10,17 @@ class ProductsService {
     try {
       //   Name Validation
       if (!name.length) {
-        throw { message: 'Name must be required', status: 400, error: true };
+        throw {
+          message: Messages.PRODUCTS.ADD_PRODUCT.NAME_VALIDATION,
+          status: 400,
+          error: true,
+        };
       }
 
       //   Description Validation
       if (!description.length) {
         throw {
-          message: 'Description must be required',
+          message: Messages.PRODUCTS.ADD_PRODUCT.DESCRIPTION_VALIDATION,
           status: 400,
           error: true,
         };
@@ -23,19 +28,27 @@ class ProductsService {
 
       //   Price Validation
       if (!price.length) {
-        throw { message: 'Price must be required', status: 400, error: true };
+        throw {
+          message: Messages.PRODUCTS.ADD_PRODUCT.PRICE_VALIDATION,
+          status: 400,
+          error: true,
+        };
       }
 
       //Image Validation
       if (!image.length) {
-        throw { message: 'Image must be required', status: 400, error: true };
+        throw {
+          message: Messages.PRODUCTS.ADD_PRODUCT.IMAGE_VALIDATION,
+          status: 400,
+          error: true,
+        };
       }
 
       let findProductTitle = products.filter((product) => product.name == name);
       //   console.log(findProductTitle);
       if (findProductTitle.length) {
         throw {
-          message: 'Title name is already exists',
+          message: Messages.PRODUCTS.ADD_PRODUCT.IS_REGISTER,
           status: 400,
           error: true,
         };
@@ -58,7 +71,7 @@ class ProductsService {
       });
       //   console.log(productDetails);
       return {
-        message: 'Product added successfully',
+        message: Messages.PRODUCTS.ADD_PRODUCT.SUCCESS,
         status: 200,
         error: false,
         // data: productDetails,
@@ -73,7 +86,7 @@ class ProductsService {
       //   productID Validation
       if (!productID.length) {
         throw {
-          message: 'ProductID must be required',
+          message: Messages.PRODUCTS.UPDATE_PRODUCT.ID_VALIDATION,
           status: 400,
           error: true,
         };
@@ -84,7 +97,7 @@ class ProductsService {
       //   console.log(findProductByID);
       if (!findProductByID.length) {
         throw {
-          message: 'ProductID  is not Found',
+          message: Messages.PRODUCTS.UPDATE_PRODUCT.PRODUCT_ID_VALIDATION,
           status: 400,
           error: true,
         };
@@ -123,7 +136,7 @@ class ProductsService {
         }
       });
       return {
-        message: 'Product Updated successfully',
+        message: Messages.PRODUCTS.UPDATE_PRODUCT.SUCCESS,
         status: 200,
         error: false,
       };
@@ -136,7 +149,11 @@ class ProductsService {
     try {
       let index = products.findIndex((user) => user.id == productID);
       if (index == -1) {
-        throw { message: 'Id is Not Found', status: 400, error: true };
+        throw {
+          message: Messages.PRODUCTS.DELETE_PRODUCT.ID_VALIDATION,
+          status: 400,
+          error: true,
+        };
       }
       products.splice(index, 1);
       fs.writeFile(reqPath, JSON.stringify(products), (error) => {
@@ -145,7 +162,7 @@ class ProductsService {
         }
       });
       return {
-        message: 'Product Deleted successfully',
+        message: Messages.PRODUCTS.DELETE_PRODUCT.SUCCESS,
         status: 200,
         error: false,
       };
@@ -158,10 +175,14 @@ class ProductsService {
     try {
       let getData = products.filter((product) => product.id === productID);
       if (!getData.length) {
-        throw { message: 'Id is Not Found', status: 400, error: true };
+        throw {
+          message: Messages.PRODUCTS.GET_PRODUCT.ID_VALIDATION,
+          status: 400,
+          error: true,
+        };
       }
       return {
-        message: 'Product GET successfully',
+        message: Messages.PRODUCTS.GET_PRODUCT.SUCCESS,
         status: 200,
         error: false,
         data: getData[0],
@@ -174,13 +195,16 @@ class ProductsService {
   getAllProduct = async (offset = 1, limit = 10) => {
     try {
       if (!products.length) {
-        throw { message: 'data not found', status: 200 };
+        throw {
+          message: Messages.PRODUCTS.GET_ALL_PRODUCT.DATA_VALIDATION,
+          status: 200,
+        };
       }
       let end = limit * offset;
       let start = end - limit;
       let data = products.slice(start, end);
       return {
-        message: 'get user succesfully',
+        message: Messages.PRODUCTS.GET_ALL_PRODUCT.SUCCESS,
         status: 200,
         error: false,
         data: { count: products.length, rows: data },
