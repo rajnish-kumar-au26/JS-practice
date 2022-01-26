@@ -1,6 +1,6 @@
-const userService = require('./services/userService');
-const productsService = require('./services/productService');
-const blogService = require('./services/blogService');
+const userService = require("./services/userService");
+const productsService = require("./services/productService");
+const blogService = require("./services/blogService");
 
 // let response = userService.getAllUsers(10, 1);
 // let response = {};
@@ -26,6 +26,7 @@ const blogService = require('./services/blogService');
 // response = blogService.getAllBlog();
 
 // // for test addProduct Function
+
 // let responseProduct = productsService.addProduct({
 //   name: 'tata',
 //   description: 'tata watch',
@@ -35,6 +36,7 @@ const blogService = require('./services/blogService');
 // console.log(responseProduct);
 
 // // for test update function
+
 // let product = {
 //   name: 'sabu',
 //   description: 'subu titan watch',
@@ -46,11 +48,13 @@ const blogService = require('./services/blogService');
 // console.log(responseProductUpdate);
 
 // //for test deleteProduct function
+
 // let id = 'c6368326-6a33-41ac-8491-e0d29b11f1d1';
 // let responseDeleteProduct = productsService.deleteProduct(id);
 // console.log(responseDeleteProduct);
 
 // // get ProductbyID test function
+
 // let id = '09f07ec8-dccb-4411-899e-d91951424ae3';
 // let data = productsService.getProduct(id);
 // console.log(data);
