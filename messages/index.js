@@ -20,7 +20,7 @@ module.exports = {
       SUCCESS: "Blog deleted successfully",
     },
   },
-  PRODUCTS: {},
+
   USERS: {
     NAME_VALIDATION: "Name must be more than 5 char",
     EMAIL_VALIDATION: "You have entered an invalid email address!",
@@ -39,6 +39,15 @@ module.exports = {
     },
     UPDATE_USER: {
       SUCCESS: "User updated successfully",
+    },
+  },
+  JWT_VALIDATION: {
+    GENERATE_TOKEN: {
+      ERROR: "Invalid user id",
+      SUCCESS: "Token generated successfully",
+    },
+    VERIFIED_TOKEN: {
+      INVALID_TOKEN: "Failed to verify Token",
     },
   },
 };
