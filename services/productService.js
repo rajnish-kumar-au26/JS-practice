@@ -1,42 +1,55 @@
-const products = require('../db/products.json');
-const { v4 } = require('uuid');
-const fs = require('fs');
-const path = require('path');
-let reqPath = path.join(__dirname, '../db/products.json');
+const products = require("../db/products.json");
+const { v4 } = require("uuid");
+const fs = require("fs");
+const path = require("path");
+let reqPath = path.join(__dirname, "../db/products.json");
+const RESPONSES = require("../responses/constantResponses");
 
 class ProductsService {
   addProduct = async ({ name, description, price, image }) => {
     try {
       //   Name Validation
       if (!name.length) {
-        throw { message: 'Name must be required', status: 400, error: true };
+        throw {
+          message: "Name must be required",
+          status: RESPONSES.BAD_REQUEST,
+          error: true,
+        };
       }
 
       //   Description Validation
       if (!description.length) {
         throw {
-          message: 'Description must be required',
-          status: 400,
+          message: "Description must be required",
+          status: RESPONSES.BAD_REQUEST,
           error: true,
         };
       }
 
       //   Price Validation
       if (!price.length) {
-        throw { message: 'Price must be required', status: 400, error: true };
+        throw {
+          message: "Price must be required",
+          status: RESPONSES.BAD_REQUEST,
+          error: true,
+        };
       }
 
       //Image Validation
       if (!image.length) {
-        throw { message: 'Image must be required', status: 400, error: true };
+        throw {
+          message: "Image must be required",
+          status: RESPONSES.BAD_REQUEST,
+          error: true,
+        };
       }
 
       let findProductTitle = products.filter((product) => product.name == name);
       //   console.log(findProductTitle);
       if (findProductTitle.length) {
         throw {
-          message: 'Title name is already exists',
-          status: 400,
+          message: "Title name is already exists",
+          status: RESPONSES.BAD_REQUEST,
           error: true,
         };
       }
@@ -58,8 +71,8 @@ class ProductsService {
       });
       //   console.log(productDetails);
       return {
-        message: 'Product added successfully',
-        status: 200,
+        message: "Product added successfully",
+        status: RESPONSES.SUCCESS,
         error: false,
         // data: productDetails,
       };
@@ -73,8 +86,8 @@ class ProductsService {
       //   productID Validation
       if (!productID.length) {
         throw {
-          message: 'ProductID must be required',
-          status: 400,
+          message: "ProductID must be required",
+          status: RESPONSES.BAD_REQUEST,
           error: true,
         };
       }
@@ -84,8 +97,8 @@ class ProductsService {
       //   console.log(findProductByID);
       if (!findProductByID.length) {
         throw {
-          message: 'ProductID  is not Found',
-          status: 400,
+          message: "ProductID  is not Found",
+          status: RESPONSES.BAD_REQUEST,
           error: true,
         };
       }
@@ -123,8 +136,8 @@ class ProductsService {
         }
       });
       return {
-        message: 'Product Updated successfully',
-        status: 200,
+        message: "Product Updated successfully",
+        status: RESPONSES.SUCCESS,
         error: false,
       };
     } catch (error) {
@@ -136,7 +149,11 @@ class ProductsService {
     try {
       let index = products.findIndex((user) => user.id == productID);
       if (index == -1) {
-        throw { message: 'Id is Not Found', status: 400, error: true };
+        throw {
+          message: "Id is Not Found",
+          status: RESPONSES.BAD_REQUEST,
+          error: true,
+        };
       }
       products.splice(index, 1);
       fs.writeFile(reqPath, JSON.stringify(products), (error) => {
@@ -145,8 +162,8 @@ class ProductsService {
         }
       });
       return {
-        message: 'Product Deleted successfully',
-        status: 200,
+        message: "Product Deleted successfully",
+        status: RESPONSES.SUCCESS,
         error: false,
       };
     } catch (error) {
@@ -158,11 +175,15 @@ class ProductsService {
     try {
       let getData = products.filter((product) => product.id === productID);
       if (!getData.length) {
-        throw { message: 'Id is Not Found', status: 400, error: true };
+        throw {
+          message: "Id is Not Found",
+          status: RESPONSES.BAD_REQUEST,
+          error: true,
+        };
       }
       return {
-        message: 'Product GET successfully',
-        status: 200,
+        message: "Product GET successfully",
+        status: RESPONSES.SUCCESS,
         error: false,
         data: getData[0],
       };
@@ -174,14 +195,14 @@ class ProductsService {
   getAllProduct = async (offset = 1, limit = 10) => {
     try {
       if (!products.length) {
-        throw { message: 'data not found', status: 200 };
+        throw { message: "data not found", status: RESPONSES.SUCCESS };
       }
       let end = limit * offset;
       let start = end - limit;
       let data = products.slice(start, end);
       return {
-        message: 'get user succesfully',
-        status: 200,
+        message: "get user succesfully",
+        status: RESPONSES.SUCCESS,
         error: false,
         data: { count: products.length, rows: data },
       };

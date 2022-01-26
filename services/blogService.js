@@ -4,6 +4,7 @@ const fs = require("fs");
 const path = require("path");
 let reqPath = path.join(__dirname, "../db/blogs.json");
 const MESSAGES = require("../messages/index");
+const RESPONSES = require("../responses/constantResponses");
 
 class BlogService {
   addBlog = ({ title, description, photo }) => {
@@ -11,8 +12,8 @@ class BlogService {
       // title validaton`
       if (title.length < 5) {
         throw {
-          message: MESSAGES.BLOG.ADD_BLOG.TITLE_VALIDATION,
-          status: 400,
+          message: MESSAGES.BLOG.TITLE_VALIDATION,
+          status: RESPONSES.BAD_REQUEST,
           error: true,
         };
       }
@@ -20,21 +21,27 @@ class BlogService {
       // description validation
       if (description.length < 10) {
         throw {
-          message: MESSAGES.BLOG.ADD_BLOG.DESCRIPTION_VALIDATION,
-          status: 400,
+          message: MESSAGES.BLOG.DESCRIPTION_VALIDATION,
+          status: RESPONSES.BAD_REQUEST,
           error: true,
         };
       }
 
       // phtot validation
       if (photo.length < 0) {
-        throw { message: "invalid photo", status: 400 };
+        throw {
+          message: MESSAGES.BLOG.IMAGE_VALIDATION,
+          status: RESPONSES.BAD_REQUEST,
+        };
       }
 
       // cheack title
       const isTitle = blogs.filter((user) => user.title == title);
       if (isTitle.length) {
-        throw { message: "title already exist", status: 400 };
+        throw {
+          message: MESSAGES.BLOG.ADD_BLOG.TITLE_EXIST,
+          status: RESPONSES.BAD_REQUEST,
+        };
       }
 
       const updatedBlog = blogs;
@@ -50,8 +57,8 @@ class BlogService {
       });
 
       return {
-        message: "Blog added successfully",
-        status: 200,
+        message: MESSAGES.BLOG.ADD_BLOG.SUCCESS,
+        status: RESPONSES.SUCCESS,
         error: false,
       };
     } catch (error) {
@@ -67,29 +74,35 @@ class BlogService {
     try {
       // check all fields data
       if (!newData.description && !newData.title && !newData.photo) {
-        throw { message: "Data required to update blog", status: 400 };
+        throw {
+          message: MESSAGES.BLOG.UPDATE_BLOG.ERROR,
+          status: RESPONSES.BAD_REQUEST,
+        };
       }
 
       // check description and description length
       if (newData.description && newData.description.length < 10) {
         throw {
-          message: "description should be atleast 10 character long",
-          status: 400,
+          message: MESSAGES.BLOG.DESCRIPTION_VALIDATION,
+          status: RESPONSES.BAD_REQUEST,
         };
       }
 
       // check title and title length
       if (newData.title && newData.title.length < 5) {
         throw {
-          message: "title should be atleast 5 character long",
-          status: 400,
+          message: MESSAGES.BLOG.TITLE_VALIDATION,
+          status: RESPONSES.BAD_REQUEST,
         };
       }
 
       //find user id
       const isBlogId = blogs.findIndex((user) => user.blogId == blogId);
       if (isBlogId === -1) {
-        throw { message: "blogId invalid", status: 400 };
+        throw {
+          message: MESSAGES.BLOG.UPDATE_BLOG.NOT_FOUND,
+          status: RESPONSES.BAD_REQUEST,
+        };
       }
 
       const updateData = blogs;
@@ -102,8 +115,8 @@ class BlogService {
       });
 
       return {
-        message: "blog update successfully",
-        status: 200,
+        message: MESSAGES.BLOG.UPDATE_BLOG.SUCCESS,
+        status: RESPONSES.SUCCESS,
         error: false,
       };
     } catch (error) {
@@ -118,13 +131,19 @@ class BlogService {
   deleteBlog = (blogId) => {
     try {
       if (!blogs.length) {
-        throw { message: "No data found", status: 400 };
+        throw {
+          message: MESSAGES.BLOG.DELETE_BLOG.ERROR,
+          status: RESPONSES.BAD_REQUEST,
+        };
       }
 
       const newData = blogs.filter((data) => data.blogId !== blogId);
 
       if (blogs.length === newData.length) {
-        throw { message: "Blog not found for given id", status: 400 };
+        throw {
+          message: MESSAGES.BLOG.DELETE_BLOG.NOT_FOUND,
+          status: RESPONSES.BAD_REQUEST,
+        };
       }
 
       fs.writeFile(reqPath, JSON.stringify(newData), (error) => {
@@ -132,8 +151,8 @@ class BlogService {
       });
 
       return {
-        message: "Blog deleted successfully",
-        status: 200,
+        message: MESSAGES.BLOG.DELETE_BLOG.SUCCESS,
+        status: RESPONSES.SUCCESS,
         error: false,
       };
     } catch (error) {
@@ -145,12 +164,12 @@ class BlogService {
     try {
       const isBlogObj = blogs.filter((user) => user.blogId === blogId);
       if (!isBlogObj.length) {
-        throw { message: "Blog not found", status: 400 };
+        throw { message: MESSAGES.BLOG.ERROR, status: RESPONSES.BAD_REQUEST };
       }
 
       return {
-        message: "Blog found successfully",
-        status: 200,
+        message: MESSAGES.BLOG.SUCCESS,
+        status: RESPONSES.SUCCESS,
         error: false,
         data: isBlogObj[0],
       };
@@ -161,7 +180,7 @@ class BlogService {
   getAllBlog = (limit = 10, offset = 1) => {
     try {
       if (!blogs.length) {
-        throw { message: "No blogs found", status: 400 };
+        throw { message: MESSAGES.BLOG.ERROR, status: RESPONSES.BAD_REQUEST };
       }
 
       const start = limit * (offset - 1);
@@ -170,8 +189,8 @@ class BlogService {
       const allBlogs = blogs.slice(start, last);
 
       return {
-        message: "Blogs found successfully",
-        status: 200,
+        message: MESSAGES.BLOG.SUCCESS,
+        status: RESPONSES.SUCCESS,
         error: false,
         data: { rows: allBlogs, count: blogs.length },
       };
