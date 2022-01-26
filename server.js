@@ -3,7 +3,7 @@ const productsService = require('./services/productService');
 const blogService = require('./services/blogService');
 
 // let response = userService.getAllUsers(10, 1);
-let response = {};
+// let response = {};
 
 // response = blogService.addBlog({
 //   title: "test blog title 1",
@@ -23,7 +23,7 @@ let response = {};
 // // response = blogService.deleteBlog(blogId);
 
 // response = blogService.getBlogById(blogId);
-response = blogService.getAllBlog();
+// response = blogService.getAllBlog();
 
 // // for test addProduct Function
 // let responseProduct = productsService.addProduct({
@@ -57,5 +57,5 @@ response = blogService.getAllBlog();
 
 // // get allProducts function test
 
-let getAllProducts = productsService.getAllProduct();
-console.log(getAllProducts);
+// let getAllProducts = productsService.getAllProduct();
+// console.log(getAllProducts);
