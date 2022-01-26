@@ -1,9 +1,9 @@
 const products = require('../db/products.json');
-const Messages = require('../messages/index');
 const { v4 } = require('uuid');
 const fs = require('fs');
 const path = require('path');
 let reqPath = path.join(__dirname, '../db/products.json');
+const RESPONSES = require('../responses/constantResponses');
 
 class ProductsService {
   addProduct = async ({ name, description, price, image }) => {
@@ -12,7 +12,7 @@ class ProductsService {
       if (!name.length) {
         throw {
           message: Messages.PRODUCTS.ADD_PRODUCT.NAME_VALIDATION,
-          status: 400,
+          status: RESPONSES.BAD_REQUEST,
           error: true,
         };
       }
@@ -21,7 +21,7 @@ class ProductsService {
       if (!description.length) {
         throw {
           message: Messages.PRODUCTS.ADD_PRODUCT.DESCRIPTION_VALIDATION,
-          status: 400,
+          status: RESPONSES.BAD_REQUEST,
           error: true,
         };
       }
@@ -30,7 +30,7 @@ class ProductsService {
       if (!price.length) {
         throw {
           message: Messages.PRODUCTS.ADD_PRODUCT.PRICE_VALIDATION,
-          status: 400,
+          status: RESPONSES.BAD_REQUEST,
           error: true,
         };
       }
@@ -39,7 +39,7 @@ class ProductsService {
       if (!image.length) {
         throw {
           message: Messages.PRODUCTS.ADD_PRODUCT.IMAGE_VALIDATION,
-          status: 400,
+          status: RESPONSES.BAD_REQUEST,
           error: true,
         };
       }
@@ -49,7 +49,7 @@ class ProductsService {
       if (findProductTitle.length) {
         throw {
           message: Messages.PRODUCTS.ADD_PRODUCT.IS_REGISTER,
-          status: 400,
+          status: RESPONSES.BAD_REQUEST,
           error: true,
         };
       }
@@ -72,7 +72,7 @@ class ProductsService {
       //   console.log(productDetails);
       return {
         message: Messages.PRODUCTS.ADD_PRODUCT.SUCCESS,
-        status: 200,
+        status: RESPONSES.SUCCESS,
         error: false,
         // data: productDetails,
       };
@@ -87,7 +87,7 @@ class ProductsService {
       if (!productID.length) {
         throw {
           message: Messages.PRODUCTS.UPDATE_PRODUCT.ID_VALIDATION,
-          status: 400,
+          status: RESPONSES.BAD_REQUEST,
           error: true,
         };
       }
@@ -98,7 +98,7 @@ class ProductsService {
       if (!findProductByID.length) {
         throw {
           message: Messages.PRODUCTS.UPDATE_PRODUCT.PRODUCT_ID_VALIDATION,
-          status: 400,
+          status: RESPONSES.BAD_REQUEST,
           error: true,
         };
       }
@@ -137,7 +137,7 @@ class ProductsService {
       });
       return {
         message: Messages.PRODUCTS.UPDATE_PRODUCT.SUCCESS,
-        status: 200,
+        status: RESPONSES.SUCCESS,
         error: false,
       };
     } catch (error) {
@@ -151,7 +151,7 @@ class ProductsService {
       if (index == -1) {
         throw {
           message: Messages.PRODUCTS.DELETE_PRODUCT.ID_VALIDATION,
-          status: 400,
+          status: RESPONSES.BAD_REQUEST,
           error: true,
         };
       }
@@ -163,7 +163,7 @@ class ProductsService {
       });
       return {
         message: Messages.PRODUCTS.DELETE_PRODUCT.SUCCESS,
-        status: 200,
+        status: RESPONSES.SUCCESS,
         error: false,
       };
     } catch (error) {
@@ -177,13 +177,13 @@ class ProductsService {
       if (!getData.length) {
         throw {
           message: Messages.PRODUCTS.GET_PRODUCT.ID_VALIDATION,
-          status: 400,
+          status: RESPONSES.BAD_REQUEST,
           error: true,
         };
       }
       return {
         message: Messages.PRODUCTS.GET_PRODUCT.SUCCESS,
-        status: 200,
+        status: RESPONSES.SUCCESS,
         error: false,
         data: getData[0],
       };
@@ -197,7 +197,7 @@ class ProductsService {
       if (!products.length) {
         throw {
           message: Messages.PRODUCTS.GET_ALL_PRODUCT.DATA_VALIDATION,
-          status: 200,
+          status: RESPONSES.SUCCESS,
         };
       }
       let end = limit * offset;
@@ -205,7 +205,7 @@ class ProductsService {
       let data = products.slice(start, end);
       return {
         message: Messages.PRODUCTS.GET_ALL_PRODUCT.SUCCESS,
-        status: 200,
+        status: RESPONSES.SUCCESS,
         error: false,
         data: { count: products.length, rows: data },
       };
