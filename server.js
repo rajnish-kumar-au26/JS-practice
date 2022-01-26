@@ -5,8 +5,6 @@ const blogService = require("./services/blogService");
 // let response = userService.getAllUsers(10, 1);
 // let response = {};
 
-//To Add new Blog to products.json
-
 // response = blogService.addBlog({
 //   title: "test blog title 1",
 //   description: "test blog description",
@@ -65,10 +63,3 @@ const blogService = require("./services/blogService");
 
 // let getAllProducts = productsService.getAllProduct();
 // console.log(getAllProducts);
-
-const updateUser = userService.register({
-  name: "Rajnish Kumar",
-  email: "rajnishkumar@gmail.com",
-  password: "JJhjkds@1234!",
-});
-console.log(updateUser);
