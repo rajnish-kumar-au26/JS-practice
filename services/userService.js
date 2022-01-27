@@ -89,6 +89,12 @@ class UserService {
 
   login = ({ email, password }) => {
     try {
+      if (!email.length && !password.length) {
+        throw {
+          message: MESSAGES.USERS.LOGIN.ERROR,
+          status: RESPONSES.BAD_REQUEST,
+        };
+      }
       // email validation
       const isEmail = users.filter((user) => user.email === email);
       if (!isEmail.length) {
@@ -99,7 +105,8 @@ class UserService {
       }
 
       // password validation
-      if (isEmail[0].password != password) {
+      const isValidPass = bcrypt.compare(password, isEmail[0].password);
+      if (!isValidPass) {
         throw {
           message: MESSAGES.USERS.PASSWORD_VALIDATION,
           status: RESPONSES.BAD_REQUEST,
@@ -137,7 +144,7 @@ class UserService {
       return {
         message: MESSAGES.USERS.SUCCESS,
         status: RESPONSES.SUCCESS,
-        count: Users.length,
+        count: users.length,
         error: false,
         data: userData,
       };
