@@ -50,6 +50,7 @@ class BlogService {
         description: description,
         feturedImage: photo,
         blogId: v4(),
+        date: new Date(),
       });
 
       fs.writeFile(reqPath, JSON.stringify(updatedBlog), (error) => {
