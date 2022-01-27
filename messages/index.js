@@ -55,6 +55,9 @@ module.exports = {
     UPDATE_USER: {
       SUCCESS: "User updated successfully",
     },
+    DELETE_USER: {
+      SUCCESS: "User deleted successfully",
+    },
   },
   JWT_VALIDATION: {
     GENERATE_TOKEN: {

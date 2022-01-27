@@ -55,12 +55,16 @@ class UserService {
       });
       return {
         message: MESSAGES.USERS.REGISTER.SUCCESS,
-        status: RESPONSES.SUCCESS,
+        status: RESPONSES.CREATED,
         error: false,
         // data: users,
       };
     } catch (error) {
-      return { message: error.message, status: error.status, error: true };
+      return {
+        message: error.message,
+        status: error.status ? error.status : RESPONSES.BAD_REQUEST,
+        error: true,
+      };
     }
   };
 
@@ -88,7 +92,7 @@ class UserService {
     }
   };
 
-  login = ({ email, password }) => {
+  login = async ({ email, password }) => {
     try {
       if (!email.length && !password.length) {
         throw {
@@ -106,7 +110,7 @@ class UserService {
       }
 
       // password validation
-      const isValidPass = bcrypt.compare(password, isEmail[0].password);
+      const isValidPass = bcrypt.compareSync(password, isEmail[0].password);
       if (!isValidPass) {
         throw {
           message: MESSAGES.USERS.PASSWORD_VALIDATION,
@@ -124,7 +128,7 @@ class UserService {
     } catch (error) {
       return {
         message: error.message,
-        status: error.status,
+        status: error.status ? error.status : RESPONSES.BAD_REQUEST,
         error: true,
       };
     }
@@ -152,7 +156,7 @@ class UserService {
     } catch (error) {
       return {
         message: error.message,
-        status: error.status,
+        status: error.status ? error.status : RESPONSES.BAD_REQUEST,
         error: error.error,
       };
     }
@@ -203,7 +207,11 @@ class UserService {
         error: false,
       };
     } catch (error) {
-      return { message: error.message, status: error.status, error: true };
+      return {
+        message: error.message,
+        status: error.status ? error.status : RESPONSES.BAD_REQUEST,
+        error: true,
+      };
     }
   };
 
@@ -222,12 +230,16 @@ class UserService {
         if (error) throw error;
       });
       return {
-        message: MESSAGES.USERS.UPDATE_USER.SUCCESS,
+        message: MESSAGES.USERS.DELETE_USER.SUCCESS,
         status: RESPONSES.SUCCESS,
         error: false,
       };
     } catch (error) {
-      return { message: error.message, status: error.status, error: true };
+      return {
+        message: error.message,
+        status: error.status ? error.status : RESPONSES.BAD_REQUEST,
+        error: true,
+      };
     }
   };
 }
