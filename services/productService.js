@@ -1,9 +1,9 @@
-const products = require('../db/products.json');
-const { v4 } = require('uuid');
-const fs = require('fs');
-const path = require('path');
-let reqPath = path.join(__dirname, '../db/products.json');
-const RESPONSES = require('../responses/constantResponses');
+const products = require("../db/products.json");
+const { v4 } = require("uuid");
+const fs = require("fs");
+const path = require("path");
+let reqPath = path.join(__dirname, "../db/products.json");
+const RESPONSES = require("../responses/constantResponses");
 
 class ProductsService {
   addProduct = async ({ name, description, price, image }) => {
