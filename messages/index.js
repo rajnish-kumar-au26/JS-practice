@@ -6,8 +6,20 @@ module.exports = {
     ERROR: "Blog not found",
     SUCCESS: "Blog found successfully",
     ADD_BLOG: {
+      TITLE_EXIST: "Title already exist",
+      SUCCESS: "Blog added successfully",
       TITLE_VALIDATION: "Title should be atleast 5 character",
       DESCRIPTION_VALIDATION: "Description should be atleast 10 character long",
+    },
+    UPDATE_BLOG: {
+      ERROR: "Data required to update blog",
+      NOT_FOUND: "Blog id required to update data",
+      SUCCESS: "Blog updated successfully",
+    },
+    DELETE_BLOG: {
+      ERROR: "Blog id not found",
+      NOT_FOUND: "User not Found",
+      SUCCESS: "Blog delete successfully",
     },
   },
   PRODUCTS: {
@@ -54,6 +66,9 @@ module.exports = {
     },
     UPDATE_USER: {
       SUCCESS: "User updated successfully",
+    },
+    DELETE_USER: {
+      SUCCESS: "User deleted successfully",
     },
   },
   JWT_VALIDATION: {

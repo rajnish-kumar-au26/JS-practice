@@ -34,7 +34,6 @@ class JwtValidation {
     try {
       const token = req.headers['authorization'];
       var data = jwt.verify(token, Secret);
-
       req.userId = data.userId;
       next();
     } catch (error) {
