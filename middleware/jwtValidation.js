@@ -30,7 +30,7 @@ class JwtValidation {
     }
   };
 
-  verifiedToken = (req, res, next) => {
+  verifyToken = (req, res, next) => {
     try {
       const token = req.headers['authorization'];
       var data = jwt.verify(token, Secret);
