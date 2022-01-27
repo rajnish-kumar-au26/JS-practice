@@ -6,6 +6,7 @@ const path = require("path");
 const reqPath = path.join(__dirname, "../db/users.json");
 const RESPONSES = require("../responses/constantResponses");
 const MESSAGES = require("../messages/index");
+const jwt = require("../middleware/jwtValidation");
 
 class UserService {
   register = async ({ name, email, password }) => {
@@ -113,7 +114,7 @@ class UserService {
         };
       }
 
-      const token = "jyjtcux646rx76cry";
+      const token = jwt.generateToken(isEmail[0].id);
       return {
         message: MESSAGES.USERS.LOGIN.SUCCESS,
         status: RESPONSES.SUCCESS,
