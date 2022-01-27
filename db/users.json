@@ -1,1 +1,14 @@
-[{"id":"8502ffab-094b-4f50-b324-d74d5d673e41","name":"rahul","email":"rahul@gmail.com","password":"$2a$10$59RAITmKoAbv9kEMRskHXuN1A8nb98DZIJ04pGXaf5K6D0Fobt3Pu"}]
+[
+  {
+    "id": "8502ffab-094b-4f50-b324-d74d5d673e41",
+    "name": "rahul",
+    "email": "rahul@gmail.com",
+    "password": "$2a$10$59RAITmKoAbv9kEMRskHXuN1A8nb98DZIJ04pGXaf5K6D0Fobt3Pu"
+  },
+  {
+    "id": "6dc0f4bf-f049-4e99-99ce-d9c78074a6b4",
+    "name": "Rajnish Kumar Kumar",
+    "email": "rajnish@gmail.com",
+    "password": "Qwerty@1122"
+  }
+]
