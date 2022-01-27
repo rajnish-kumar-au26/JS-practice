@@ -1,11 +1,12 @@
-const users = require("../db/users.json");
-const bcrypt = require("bcryptjs");
-const { v4 } = require("uuid");
-const fs = require("fs");
-const path = require("path");
-const reqPath = path.join(__dirname, "../db/users.json");
-const RESPONSES = require("../responses/constantResponses");
-const MESSAGES = require("../messages/index");
+const users = require('../db/users.json');
+const bcrypt = require('bcryptjs');
+const { v4 } = require('uuid');
+const fs = require('fs');
+const path = require('path');
+const reqPath = path.join(__dirname, '../db/users.json');
+const RESPONSES = require('../responses/constantResponses');
+const MESSAGES = require('../messages/index');
+const jwt = require('../middleware/jwtValidation');
 
 class UserService {
   register = async ({ name, email, password }) => {
@@ -113,7 +114,7 @@ class UserService {
         };
       }
 
-      const token = "jyjtcux646rx76cry";
+      const token = jwt.generateToken(isEmail[0].id);
       return {
         message: MESSAGES.USERS.LOGIN.SUCCESS,
         status: RESPONSES.SUCCESS,
@@ -197,7 +198,7 @@ class UserService {
       });
 
       return {
-        message: "name and password changed sucesfully",
+        message: 'name and password changed sucesfully',
         status: 200,
         error: false,
       };
@@ -209,7 +210,7 @@ class UserService {
   deleteUser = (id) => {
     try {
       if (!users.length) {
-        throw { message: "No user found" };
+        throw { message: 'No user found' };
       }
       const newUser = users.filter((user) => user.id !== id);
 
