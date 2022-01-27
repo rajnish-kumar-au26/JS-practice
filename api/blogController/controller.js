@@ -4,7 +4,9 @@ class BlogController {
   addBlog = (req, res) => {
     try {
       const { description, title, photo } = req.body;
+      const userId = req.userId;
       const blogRes = blogService.addBlog({
+        userId: userId,
         title: title,
         description: description,
         photo: photo,
@@ -27,10 +29,8 @@ class BlogController {
   };
   updateBlog = (req, res) => {
     try {
-      const blogRes = blogService.updateBlog(
-        req.body.blogId ? req.body.blogId : "",
-        req.body
-      );
+      const userId = req.userId;
+      const blogRes = blogService.updateBlog({ ...req.body, userId: userId });
       if (blogRes.error) {
         throw blogRes;
       }
@@ -70,8 +70,8 @@ class BlogController {
   };
   getBlogById = (req, res) => {
     try {
-      const id = req.params.id;
-      const blogRes = blogService.getBlogById(id);
+      const id = req.userId;
+      const blogRes = blogService.getBlogByUserId(id);
 
       return res.status(blogRes.status).send({
         message: blogRes.message,
