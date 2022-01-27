@@ -32,10 +32,10 @@ class JwtValidation {
 
   verifiedToken = (req, res, next) => {
     try {
-      const token = req.header['authorization'];
-      var usersId = jwt.verify(token, Secret);
+      const token = req.headers['authorization'];
+      var data = jwt.verify(token, Secret);
 
-      req.userId = usersId;
+      req.userId = data.userId;
       next();
     } catch (error) {
       res.status(RESPONSES.UNAUTHORIZED).send({
