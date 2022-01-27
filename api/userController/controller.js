@@ -38,7 +38,8 @@ class userController {
   };
 
   getAllUser = (req, res) => {
-    const { limit, offset } = req.body;
+    let limit = parseInt(req.params.limit);
+    let offset = parseInt(req.params.offset);
     const getUsers = userService.getAllUsers(limit, offset);
     return res.status(getUsers.status).send({
       message: getUsers.message,
