@@ -13,7 +13,7 @@ class JwtValidation {
         };
       }
 
-      const token = jwt.sign(userId, Secret, { expiresIn: "10h" });
+      const token = jwt.sign({ userId }, Secret, { expiresIn: "10h" });
 
       return {
         message: MESSAGES.JWT_VALIDATION.GENERATE_TOKEN.SUCCESS,
