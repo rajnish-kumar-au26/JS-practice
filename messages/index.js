@@ -49,6 +49,7 @@ module.exports = {
       SUCCESS: "User found successfully",
     },
     LOGIN: {
+      ERROR: "email and password required",
       SUCCESS: "User successfully logged in",
     },
     UPDATE_USER: {
