@@ -28,7 +28,7 @@ class BlogService {
       }
 
       // phtot validation
-      if (photo.length < 0) {
+      if (!photo || photo.length < 5) {
         throw {
           message: MESSAGES.BLOG.IMAGE_VALIDATION,
           status: RESPONSES.BAD_REQUEST,
@@ -65,14 +65,18 @@ class BlogService {
     } catch (error) {
       return {
         message: error.message,
-        status: error.status,
-        errpr: true,
+        status: error.status ? error.status : RESPONSES.BAD_REQUEST,
+        error: true,
       };
     }
   };
 
   updateBlog = (blogId, newData) => {
     try {
+      if (!blogId) {
+        throw { message: MESSAGES.BLOG.UPDATE_BLOG.NOT_FOUND, status: 400 };
+      }
+
       // check all fields data
       if (!newData.description && !newData.title && !newData.photo) {
         throw {
@@ -123,7 +127,7 @@ class BlogService {
     } catch (error) {
       return {
         message: error.message,
-        status: error.status,
+        status: error.status ? error.status : RESPONSES.BAD_REQUEST,
         error: true,
       };
     }
@@ -157,7 +161,11 @@ class BlogService {
         error: false,
       };
     } catch (error) {
-      return { message: error.message, status: error.status, error: true };
+      return {
+        message: error.message,
+        status: error.status ? error.status : RESPONSES.BAD_REQUEST,
+        error: true,
+      };
     }
   };
 
@@ -175,7 +183,11 @@ class BlogService {
         data: isBlogObj[0],
       };
     } catch (error) {
-      return { message: error.message, status: error.status, error: true };
+      return {
+        message: error.message,
+        status: error.status ? error.status : RESPONSES.BAD_REQUEST,
+        error: true,
+      };
     }
   };
   getAllBlog = (limit = 10, offset = 1) => {
@@ -196,7 +208,11 @@ class BlogService {
         data: { rows: allBlogs, count: blogs.length },
       };
     } catch (error) {
-      return { message: error.message, status: error.status, error: true };
+      return {
+        message: error.message,
+        status: error.status ? error.status : RESPONSES.BAD_REQUEST,
+        error: true,
+      };
     }
   };
 }
