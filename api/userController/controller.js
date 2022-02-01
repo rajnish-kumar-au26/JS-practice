@@ -1,4 +1,5 @@
 const userService = require("../../services/userService");
+const walletService = require("../../services/walletService");
 
 class userController {
   getUserById = (req, res) => {
@@ -12,16 +13,37 @@ class userController {
   };
 
   register = async (req, res) => {
-    const { name, email, password } = req.body;
-    const registerUser = await userService.register({
-      name: name,
-      email: email,
-      password: password,
-    });
-    return res.status(registerUser.status).send({
-      message: registerUser.message,
-      error: registerUser.error,
-    });
+    try {
+      const { name, email, password } = req.body;
+      const registerUser = await userService.register({
+        name: name,
+        email: email,
+        password: password,
+      });
+      if (registerUser.error) {
+        throw registerUser;
+      }
+      const userInfo = await userService.getUserByEmail({ email });
+
+      if (userInfo.error) {
+        throw userInfo;
+      }
+
+      await walletService.create({
+        userdId: userInfo.data.id,
+        amount: 0,
+        currency: "INR",
+      });
+      return res.status(registerUser.status).send({
+        message: registerUser.message,
+        error: registerUser.error,
+      });
+    } catch (error) {
+      return res.status(error.status).send({
+        message: error.message,
+        error: error.error,
+      });
+    }
   };
 
   login = async (req, res) => {
