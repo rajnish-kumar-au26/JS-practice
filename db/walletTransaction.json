@@ -1,0 +1,16 @@
+[
+  {
+    "walletTransactionId": "01b56d08-60d9-4dfe-b0b6-0318475f1f83",
+    "walletId": "yuiarjkabdhkag",
+    "status": "Approved",
+    "transactionAmount": 500,
+    "transactionDate": "31/01/2022"
+  },
+  {
+    "walletTransactionId": "57737fa2-621f-4399-857c-2e0f5aa3e73f",
+    "walletId": "yuiarjkabdhkag",
+    "status": "Approved",
+    "transactionAmount": 1000,
+    "transactionDate": "2022-01-31T11:54:21.861Z"
+  }
+]

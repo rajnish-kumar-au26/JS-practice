@@ -80,4 +80,13 @@ module.exports = {
       INVALID_TOKEN: "Failed to verify Token",
     },
   },
+  WALLET_TRANSACTION: {
+    WALLET_ID_VALIDATION: "Wallet id is required",
+    TRANSACTION_AMOUNT: "Transaction amount is required",
+    TRANSACTION_DATE: "Transaction date is mandatory",
+    USER_EXIST: "Email already exist",
+    ERROR: "Transaction is not found",
+    STATUS: "Status is required",
+    SUCCESS: "Wallet Transaction Created",
+  },
 };
