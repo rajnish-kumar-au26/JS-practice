@@ -7,7 +7,7 @@ const MESSAGES = require("../messages/index");
 const RESPONSES = require("../responses/constantResponses");
 
 class BlogService {
-  addBlog = ({ title, description, photo }) => {
+  addBlog = ({ userId, title, description, photo }) => {
     try {
       // title validaton`
       if (title.length < 5) {
@@ -28,7 +28,7 @@ class BlogService {
       }
 
       // phtot validation
-      if (photo.length < 0) {
+      if (!photo || photo.length < 5) {
         throw {
           message: MESSAGES.BLOG.IMAGE_VALIDATION,
           status: RESPONSES.BAD_REQUEST,
@@ -46,6 +46,7 @@ class BlogService {
 
       const updatedBlog = blogs;
       updatedBlog.push({
+        userId: userId,
         title: title,
         description: description,
         feturedImage: photo,
@@ -65,16 +66,21 @@ class BlogService {
     } catch (error) {
       return {
         message: error.message,
-        status: error.status,
-        errpr: true,
+        status: error.status ? error.status : RESPONSES.BAD_REQUEST,
+        error: true,
       };
     }
   };
 
-  updateBlog = (blogId, newData) => {
+  updateBlog = (newData) => {
     try {
       // check all fields data
-      if (!newData.description && !newData.title && !newData.photo) {
+      if (
+        !newData.description &&
+        !newData.title &&
+        !newData.photo &&
+        !newData.userId
+      ) {
         throw {
           message: MESSAGES.BLOG.UPDATE_BLOG.ERROR,
           status: RESPONSES.BAD_REQUEST,
@@ -98,7 +104,7 @@ class BlogService {
       }
 
       //find user id
-      const isBlogId = blogs.findIndex((user) => user.blogId == blogId);
+      const isBlogId = blogs.findIndex((user) => user.userId == newData.userId);
       if (isBlogId === -1) {
         throw {
           message: MESSAGES.BLOG.UPDATE_BLOG.NOT_FOUND,
@@ -110,6 +116,7 @@ class BlogService {
       updateData[isBlogId].title = newData.title;
       updateData[isBlogId].description = newData.description;
       updateData[isBlogId].feturedImage = newData.photo;
+      updateData[isBlogId].userId = newData.userId;
 
       fs.writeFile(reqPath, JSON.stringify(updateData), (error) => {
         if (error) throw error;
@@ -123,7 +130,7 @@ class BlogService {
     } catch (error) {
       return {
         message: error.message,
-        status: error.status,
+        status: error.status ? error.status : RESPONSES.BAD_REQUEST,
         error: true,
       };
     }
@@ -157,13 +164,17 @@ class BlogService {
         error: false,
       };
     } catch (error) {
-      return { message: error.message, status: error.status, error: true };
+      return {
+        message: error.message,
+        status: error.status ? error.status : RESPONSES.BAD_REQUEST,
+        error: true,
+      };
     }
   };
 
-  getBlogById = (blogId) => {
+  getBlogByUserId = (userId) => {
     try {
-      const isBlogObj = blogs.filter((user) => user.blogId === blogId);
+      const isBlogObj = blogs.filter((user) => user.userId === userId);
       if (!isBlogObj.length) {
         throw { message: MESSAGES.BLOG.ERROR, status: RESPONSES.BAD_REQUEST };
       }
@@ -175,7 +186,11 @@ class BlogService {
         data: isBlogObj[0],
       };
     } catch (error) {
-      return { message: error.message, status: error.status, error: true };
+      return {
+        message: error.message,
+        status: error.status ? error.status : RESPONSES.BAD_REQUEST,
+        error: true,
+      };
     }
   };
   getAllBlog = (limit = 10, offset = 1) => {
@@ -196,7 +211,11 @@ class BlogService {
         data: { rows: allBlogs, count: blogs.length },
       };
     } catch (error) {
-      return { message: error.message, status: error.status, error: true };
+      return {
+        message: error.message,
+        status: error.status ? error.status : RESPONSES.BAD_REQUEST,
+        error: true,
+      };
     }
   };
 }

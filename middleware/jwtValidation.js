@@ -1,7 +1,7 @@
-const jwt = require("jsonwebtoken");
-const Secret = "mysecret";
-const MESSAGES = require("../messages/index");
-const RESPONSES = require("../responses/constantResponses");
+const jwt = require('jsonwebtoken');
+const Secret = 'mysecret';
+const MESSAGES = require('../messages/index');
+const RESPONSES = require('../responses/constantResponses');
 
 class JwtValidation {
   generateToken = (userId) => {
@@ -13,7 +13,7 @@ class JwtValidation {
         };
       }
 
-      const token = jwt.sign({ userId }, Secret, { expiresIn: "10h" });
+      const token = jwt.sign({ userId }, Secret, { expiresIn: '10h' });
 
       return {
         message: MESSAGES.JWT_VALIDATION.GENERATE_TOKEN.SUCCESS,
@@ -30,9 +30,9 @@ class JwtValidation {
     }
   };
 
-  verifiedToken = (req, res, next) => {
+  verifyToken = (req, res, next) => {
     try {
-      const token = req.headers["authorization"];
+      const token = req.headers['authorization'];
       var data = jwt.verify(token, Secret);
       req.userId = data.userId;
       next();

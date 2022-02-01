@@ -6,8 +6,20 @@ module.exports = {
     ERROR: "Blog not found",
     SUCCESS: "Blog found successfully",
     ADD_BLOG: {
+      TITLE_EXIST: "Title already exist",
+      SUCCESS: "Blog added successfully",
       TITLE_VALIDATION: "Title should be atleast 5 character",
       DESCRIPTION_VALIDATION: "Description should be atleast 10 character long",
+    },
+    UPDATE_BLOG: {
+      ERROR: "Data required to update blog",
+      NOT_FOUND: "Blog id required to update data",
+      SUCCESS: "Blog updated successfully",
+    },
+    DELETE_BLOG: {
+      ERROR: "Blog id not found",
+      NOT_FOUND: "User not Found",
+      SUCCESS: "Blog delete successfully",
     },
   },
   PRODUCTS: {
@@ -67,5 +79,14 @@ module.exports = {
     VERIFIED_TOKEN: {
       INVALID_TOKEN: "Failed to verify Token",
     },
+  },
+  WALLET_TRANSACTION: {
+    WALLET_ID_VALIDATION: "Wallet id is required",
+    TRANSACTION_AMOUNT: "Transaction amount is required",
+    TRANSACTION_DATE: "Transaction date is mandatory",
+    USER_EXIST: "Email already exist",
+    ERROR: "Transaction is not found",
+    STATUS: "Status is required",
+    SUCCESS: "Wallet Transaction Created",
   },
 };

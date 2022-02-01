@@ -117,7 +117,7 @@ class UserService {
           status: RESPONSES.BAD_REQUEST,
         };
       }
-
+      //JWT Token Generation
       const token = jwt.generateToken(isEmail[0].id);
       return {
         message: MESSAGES.USERS.LOGIN.SUCCESS,
