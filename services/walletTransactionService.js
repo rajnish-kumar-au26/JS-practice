@@ -108,9 +108,95 @@ class walletTransaction {
       };
     }
   };
+
+  delete = (id) => {
+    try {
+      const walletTransaction = walletTransactionModel;
+      if (!walletTransaction.length) {
+        throw { message: "No user found" };
+      }
+      const newTransactions = walletTransaction.filter(
+        (trans) => trans.walletTransactionId !== id
+      );
+
+      if (walletTransaction.length === newTransactions.length) {
+        throw { message: "User doesn't exist", status: 400, error: true };
+      }
+
+      fs.writeFile(reqPath, JSON.stringify(newTransactions), (error) => {
+        if (error) throw error;
+      });
+      return {
+        message: MESSAGES.WALLET_TRANSACTION.DELETE_TRANSACTION.SUCCESS,
+        status: RESPONSES.SUCCESS,
+        error: false,
+      };
+    } catch (error) {
+      return {
+        message: error.message,
+        status: error.status ? error.status : RESPONSES.BAD_REQUEST,
+        error: true,
+      };
+    }
+  };
+
+  getAllTransaction = (limit = 10, offset = 1) => {
+    try {
+      const walletTransaction = walletTransactionModel;
+      if (!walletTransaction.length) {
+        throw {
+          message: MESSAGES.USERS.USER_EXIST,
+          error: true,
+          status: RESPONSES.BAD_REQUEST,
+        };
+      }
+      const dataLimit = limit * offset;
+      const initialData = dataLimit - limit;
+      let transactionData = walletTransaction.slice(initialData, dataLimit);
+      return {
+        message: MESSAGES.WALLET_TRANSACTION.SUCCESS,
+        status: RESPONSES.SUCCESS,
+        count: walletTransaction.length,
+        error: false,
+        data: transactionData,
+      };
+    } catch (error) {
+      return {
+        message: error.message,
+        status: error.status ? error.status : RESPONSES.BAD_REQUEST,
+        error: error.error,
+      };
+    }
+  };
+  getTransactionById = (transactionId) => {
+    try {
+      const walletTransaction = walletTransactionModel;
+      let getTransaction = walletTransaction.filter(
+        (trans) => trans.walletTransactionId === transactionId
+      );
+      if (!getTransaction.length) {
+        throw {
+          status: RESPONSES.BAD_REQUEST,
+          message: MESSAGES.WALLET_TRANSACTION.WALLET_ID_VALIDATION,
+        };
+      }
+      return {
+        message: MESSAGES.WALLET_TRANSACTION.GET_TRANSACTION_BY_ID.SUCCESS,
+        status: RESPONSES.SUCCESS,
+        error: false,
+        data: getTransaction[0],
+      };
+    } catch (error) {
+      return {
+        message: error.message,
+        status: error.status ? error.status : RESPONSES.BAD_REQUEST,
+        error: true,
+      };
+    }
+  };
 }
 
-const walletTrans = new walletTransaction();
+// const walletTrans = new walletTransaction();
 
 // const t1 = walletTrans.create({
 //   status: "PENDING",
@@ -119,10 +205,16 @@ const walletTrans = new walletTransaction();
 //   walletId: "yuiarjkabdhkag",
 // });
 
-const t2 = walletTrans.update({
-  status: "Approved",
-  walletTransactionId: "57737fa2-621f-4399-857c-2e0f5aa3e73f",
-  transactionAmount: 1000,
-});
+// const t2 = walletTrans.update({
+//   status: "Approved",
+//   walletTransactionId: "57737fa2-621f-4399-857c-2e0f5aa3e73f",
+//   transactionAmount: 1000,
+// });
 
-console.log(t2);
+// const t3 = walletTrans.delete("01b56d08-60d9-4dfe-b0b6-0318475f1f83");
+
+// const t4 = walletTrans.getTransactionById(
+//   "57737fa2-621f-4399-857c-2e0f5aa3e73f"
+// );
+
+// console.log(t4);
