@@ -88,5 +88,11 @@ module.exports = {
     ERROR: "Transaction is not found",
     STATUS: "Status is required",
     SUCCESS: "Wallet Transaction Created",
+    DELETE_TRANSACTION: {
+      SUCCESS: "Transaction deleted successfully",
+    },
+    GET_TRANSACTION_BY_ID: {
+      SUCCESS: "Transaction ID Found Successfully",
+    },
   },
 };
