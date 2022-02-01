@@ -7,7 +7,7 @@ const MESSAGES = require("../messages/index");
 const RESPONSES = require("../responses/constantResponses");
 
 class walletTransaction {
-  create = ({ status, walletId, transactionAmount, transactionType }) => {
+  create = async ({ status, walletId, transactionAmount }) => {
     try {
       const walletTransactionId = v4();
       if (!walletId.length) {
