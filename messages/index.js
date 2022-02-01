@@ -95,4 +95,24 @@ module.exports = {
       SUCCESS: "Transaction ID Found Successfully",
     },
   },
+  WALLET: {
+    USER_VALIDATION: "Userid required",
+    CREATE: {
+      SUCCESS: "Wallet create successfully",
+    },
+    UPDATE: {
+      DATA_REQUIRED: "Data required to update wallet",
+      SUCCESS: "Wallet update successfully",
+    },
+    GATE_BY_ID: {
+      SUCCESS: "Wallet created successfully",
+    },
+    DELETE: {
+      WALLET_ID_REQ: "Wallet id required",
+      SUCCESS: "Wallet delete successfully",
+    },
+    GET_WALLET_LIST: {
+      SUCCESS: "Found list Successfully",
+    },
+  },
 };

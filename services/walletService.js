@@ -4,12 +4,21 @@ const fs = require("fs");
 const path = require("path");
 const reqPath = path.join(__dirname, "../db/wallet.json");
 const { v4 } = require("uuid");
+const Message = require("../messages/index");
 
 class WalletService {
-  create = ({ userdId, amount, currency }) => {
+  create = ({ userId, amount, currency }) => {
     try {
+      // userId validation
+      if (!userId) {
+        throw {
+          message: Message.WALLET.USER_VALIDATION,
+          status: 400,
+        };
+      }
+
       const newWallet = walletModel;
-      newWallet.push({ userdId, amount, currency, walletId: v4() });
+      newWallet.push({ userId, amount, currency, walletId: v4() });
       fs.writeFile(reqPath, JSON.stringify(newWallet), (error) => {
         if (error) {
           throw error;
@@ -17,7 +26,7 @@ class WalletService {
       });
       return {
         status: RESPONSES.SUCCESS,
-        message: "Wallet created successfully",
+        message: Message.WALLET.CREATE.SUCCESS,
         error: false,
       };
     } catch (error) {
@@ -29,13 +38,21 @@ class WalletService {
     }
   };
 
-  update = ({ userdId, amount, currency }) => {
+  update = async ({ userId, amount, currency }) => {
     try {
+      // userId validation
+      if (!userId && !amount && !currency) {
+        throw {
+          message: Message.WALLET.UPDATE.DATA_REQUIRED,
+          status: 400,
+        };
+      }
+
       const newWallet = walletModel;
-      const userWallet = newWallet.findIndex((wall) => wall.userdId == userdId);
+      const userWallet = newWallet.findIndex((wall) => wall.userId == userId);
 
       newWallet[userWallet].amount = amount;
-      newWallet[userWallet].currency = currency;
+      newWallet[userWallet].currency = currency ? currency : "INR";
 
       fs.writeFile(reqPath, JSON.stringify(newWallet), (error) => {
         if (error) {
@@ -44,7 +61,7 @@ class WalletService {
       });
       return {
         status: RESPONSES.SUCCESS,
-        message: "Wallet created successfully",
+        message: Message.WALLET.UPDATE.SUCCESS,
         error: false,
       };
     } catch (error) {
@@ -56,12 +73,26 @@ class WalletService {
     }
   };
 
-  getById = ({ userdId }) => {
+  getById = async ({ userId }) => {
     try {
-      const newWallet = walletModel.filter((wall) => wall.userdId === userdId);
+      // userId Validation
+      if (!userId) {
+        throw {
+          message: Message.WALLET.USER_VALIDATION,
+          status: 400,
+        };
+      }
+      if (!walletModel.length) {
+        throw { message: "No data found in wallet database" };
+      }
+      const newWallet = walletModel.filter((wall) => wall.userId === userId);
+
+      if (!newWallet.length) {
+        throw { message: "No wallet found for the given id" };
+      }
       return {
         status: RESPONSES.SUCCESS,
-        message: "Wallet created successfully",
+        message: Message.WALLET.GATE_BY_ID.SUCCESS,
         error: false,
         data: newWallet[0],
       };
@@ -76,6 +107,10 @@ class WalletService {
 
   delete = ({ walletId }) => {
     try {
+      // walletId validation
+      if (!walletId) {
+        throw { message: Message.WALLET.DELETE.WALLET_ID_REQ, status: 400 };
+      }
       const newWallet = walletModel.filter(
         (wall) => wall.walletId !== walletId
       );
@@ -87,7 +122,7 @@ class WalletService {
       });
       return {
         status: RESPONSES.SUCCESS,
-        message: "Wallet created successfully",
+        message: Message.WALLET.DELETE.SUCCESS,
         error: false,
       };
     } catch (error) {
@@ -107,7 +142,7 @@ class WalletService {
       let walletData = walletModel.slice(initialData, dataLimit);
       return {
         status: RESPONSES.SUCCESS,
-        message: "Wallet created successfully",
+        message: Message.WALLET.GET_WALLET_LIST.SUCCESS,
         error: false,
         data: {
           row: walletData,
@@ -131,21 +166,21 @@ module.exports = new WalletService();
 let response;
 
 //  response = walletIns.create({
-//   userdId: "jhdgtd",
+//   userId: "jhdgtd",
 //   amount: 7,
 //   currency: "INR",
 // });
 // console.log("Create ====>", response);
 
 // response = walletIns.update({
-//   userdId: "jhdgtd",
+//   userId: "jhdgtd",
 //   amount: 67767,
 //   currency: "USD",
 // });
 // console.log("Update ====>", response);
 
 // response = walletIns.getById({
-//   userdId: "jhdgtd",
+//   userId: "jhdgtd",
 // });
 // console.log("GetById ====>", response);
 
@@ -156,6 +191,6 @@ let response;
 // console.log("GEt Wallet List ====>", response);
 
 // response = walletIns.delete({
-//   userdId: "jhdgtd",
+//   userId: "jhdgtd",
 // });
 // console.log("Delete ====>", response);

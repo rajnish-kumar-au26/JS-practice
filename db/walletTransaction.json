@@ -5,5 +5,26 @@
     "status": "Approved",
     "transactionAmount": 1000,
     "transactionDate": "2022-01-31T11:54:21.861Z"
+  },
+  {
+    "walletTransactionId": "d5f618ad-ec49-4123-b5f2-c5d1b587301c",
+    "walletId": "873t8g42g4g43",
+    "status": "COMPLETED",
+    "transactionAmount": "15999",
+    "transactionDate": "2022-02-01T12:00:22.500Z"
+  },
+  {
+    "walletTransactionId": "a85cbb89-0d18-467f-98e4-bb0f01193465",
+    "walletId": "873t8g42g4g43",
+    "status": "COMPLETED",
+    "transactionAmount": "15999",
+    "transactionDate": "2022-02-01T12:01:48.269Z"
+  },
+  {
+    "walletTransactionId": "cb4e4fb7-ea8c-48ca-bb29-f8ca0f5bea27",
+    "walletId": "873t8g42g4g43",
+    "status": "COMPLETED",
+    "transactionAmount": 15999,
+    "transactionDate": "2022-02-01T12:05:24.183Z"
   }
 ]
