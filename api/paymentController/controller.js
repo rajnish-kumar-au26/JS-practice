@@ -45,6 +45,7 @@ class PaymentController {
         status: "COMPLETED",
         walletId: walletInfo.data.walletId,
         transactionAmount: parseInt(productPrice),
+        transactionType: "PURCHASE",
       });
 
       if (walletTransactionInfo.error) {

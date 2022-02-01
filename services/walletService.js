@@ -7,7 +7,7 @@ const { v4 } = require("uuid");
 const Message = require("../messages/index");
 
 class WalletService {
-  create = ({ userId, amount, currency }) => {
+  create = async ({ userId, amount, currency }) => {
     try {
       // userId validation
       if (!userId) {
@@ -73,7 +73,7 @@ class WalletService {
     }
   };
 
-  getById = async ({ userId }) => {
+  getById = async (userId) => {
     try {
       // userId Validation
       if (!userId) {
@@ -163,7 +163,7 @@ module.exports = new WalletService();
 
 // const walletIns = new WalletService();
 
-let response;
+// let response;
 
 //  response = walletIns.create({
 //   userId: "jhdgtd",
