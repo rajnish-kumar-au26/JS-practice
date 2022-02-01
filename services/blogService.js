@@ -174,6 +174,10 @@ class BlogService {
 
   getBlogByUserId = (userId) => {
     try {
+      if (!userId) {
+        throw { message: "Enter a valid userid", status: 400 };
+      }
+
       const isBlogObj = blogs.filter((user) => user.userId === userId);
       if (!isBlogObj.length) {
         throw { message: MESSAGES.BLOG.ERROR, status: RESPONSES.BAD_REQUEST };
