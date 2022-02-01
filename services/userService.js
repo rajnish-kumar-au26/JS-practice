@@ -68,7 +68,7 @@ class UserService {
     }
   };
 
-  getUserByEmail = ({ email }) => {
+  getUserByEmail = async ({ email }) => {
     try {
       let getUser = users.filter((user) => user.email === email);
       if (!getUser.length) {

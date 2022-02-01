@@ -7,7 +7,7 @@ const MESSAGES = require("../messages/index");
 const RESPONSES = require("../responses/constantResponses");
 
 class walletTransaction {
-  create = ({ status, walletId, transactionAmount }) => {
+  create = ({ status, walletId, transactionAmount, transactionType }) => {
     try {
       const walletTransactionId = v4();
       if (!walletId.length) {
@@ -29,11 +29,18 @@ class walletTransaction {
           status: RESPONSES.BAD_REQUEST,
         };
       }
+      if (!transactionType.length) {
+        throw {
+          message: MESSAGES.WALLET_TRANSACTION.STATUS,
+          status: RESPONSES.BAD_REQUEST,
+        };
+      }
       walletTransactionModel.push({
         walletTransactionId,
         walletId,
         status,
         transactionAmount,
+        transactionType,
         transactionDate: new Date(),
       });
       fs.writeFile(reqPath, JSON.stringify(walletTransactionModel), (error) => {
@@ -195,6 +202,8 @@ class walletTransaction {
     }
   };
 }
+
+module.exports = new walletTransaction();
 
 // const walletTrans = new walletTransaction();
 

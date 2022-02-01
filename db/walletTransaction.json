@@ -5,5 +5,53 @@
     "status": "Approved",
     "transactionAmount": 1000,
     "transactionDate": "2022-01-31T11:54:21.861Z"
+  },
+  {
+    "walletTransactionId": "b2008299-04b3-4441-ac93-da584c9c81bf",
+    "walletId": "c2fd0c57-b54b-4792-b036-dcd51cb47815",
+    "status": "COMPLETED",
+    "transactionAmount": 100,
+    "transactionType": "DEPOSIT",
+    "transactionDate": "2022-02-01T11:31:28.669Z"
+  },
+  {
+    "walletTransactionId": "d098058e-791c-4cc9-8e97-4a7a051c1b21",
+    "walletId": "c2fd0c57-b54b-4792-b036-dcd51cb47815",
+    "status": "COMPLETED",
+    "transactionAmount": 10,
+    "transactionType": "WITHDRAWAL",
+    "transactionDate": "2022-02-01T11:33:11.427Z"
+  },
+  {
+    "walletTransactionId": "7be7a636-8bf7-4c82-8c08-46b116f4ba8c",
+    "walletId": "c2fd0c57-b54b-4792-b036-dcd51cb47815",
+    "status": "COMPLETED",
+    "transactionAmount": 100,
+    "transactionType": "DEPOSIT",
+    "transactionDate": "2022-02-01T11:34:33.853Z"
+  },
+  {
+    "walletTransactionId": "03a491e9-9d5a-4c11-af7c-dc078c9b98cd",
+    "walletId": "c2fd0c57-b54b-4792-b036-dcd51cb47815",
+    "status": "COMPLETED",
+    "transactionAmount": 10,
+    "transactionType": "WITHDRAWAL",
+    "transactionDate": "2022-02-01T11:35:18.366Z"
+  },
+  {
+    "walletTransactionId": "2003f58a-14ca-4cd4-912e-26f8f70d4472",
+    "walletId": "c2fd0c57-b54b-4792-b036-dcd51cb47815",
+    "status": "COMPLETED",
+    "transactionAmount": 200,
+    "transactionType": "DEPOSIT",
+    "transactionDate": "2022-02-01T11:35:41.601Z"
+  },
+  {
+    "walletTransactionId": "45b3c766-4725-46c7-b1d5-b47a4410a8f0",
+    "walletId": "c2fd0c57-b54b-4792-b036-dcd51cb47815",
+    "status": "COMPLETED",
+    "transactionAmount": 100,
+    "transactionType": "DEPOSIT",
+    "transactionDate": "2022-02-01T11:36:03.985Z"
   }
 ]

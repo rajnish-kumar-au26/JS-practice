@@ -6,7 +6,7 @@ const reqPath = path.join(__dirname, "../db/wallet.json");
 const { v4 } = require("uuid");
 
 class WalletService {
-  create = ({ userdId, amount, currency }) => {
+  create = async ({ userdId, amount, currency }) => {
     try {
       const newWallet = walletModel;
       newWallet.push({ userdId, amount, currency, walletId: v4() });
@@ -44,7 +44,7 @@ class WalletService {
       });
       return {
         status: RESPONSES.SUCCESS,
-        message: "Wallet created successfully",
+        message: "Amount added successfully",
         error: false,
       };
     } catch (error) {
@@ -56,12 +56,12 @@ class WalletService {
     }
   };
 
-  getById = ({ userdId }) => {
+  getById = (userdId) => {
     try {
       const newWallet = walletModel.filter((wall) => wall.userdId === userdId);
       return {
         status: RESPONSES.SUCCESS,
-        message: "Wallet created successfully",
+        message: "Found user by User Id",
         error: false,
         data: newWallet[0],
       };
@@ -87,7 +87,7 @@ class WalletService {
       });
       return {
         status: RESPONSES.SUCCESS,
-        message: "Wallet created successfully",
+        message: "User Deleted successfully",
         error: false,
       };
     } catch (error) {
@@ -128,7 +128,7 @@ module.exports = new WalletService();
 
 // const walletIns = new WalletService();
 
-let response;
+// let response;
 
 //  response = walletIns.create({
 //   userdId: "jhdgtd",
