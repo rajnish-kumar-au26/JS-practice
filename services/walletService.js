@@ -160,37 +160,3 @@ class WalletService {
 }
 
 module.exports = new WalletService();
-
-// const walletIns = new WalletService();
-
-// let response;
-
-//  response = walletIns.create({
-//   userId: "jhdgtd",
-//   amount: 7,
-//   currency: "INR",
-// });
-// console.log("Create ====>", response);
-
-// response = walletIns.update({
-//   userId: "jhdgtd",
-//   amount: 67767,
-//   currency: "USD",
-// });
-// console.log("Update ====>", response);
-
-// response = walletIns.getById({
-//   userId: "jhdgtd",
-// });
-// console.log("GetById ====>", response);
-
-// response = walletIns.getWalletList({
-//   limit: 10,
-//   offset: 1,
-// });
-// console.log("GEt Wallet List ====>", response);
-
-// response = walletIns.delete({
-//   userId: "jhdgtd",
-// });
-// console.log("Delete ====>", response);

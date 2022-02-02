@@ -1,4 +1,5 @@
-const productsService = require('../../services/productService');
+const productsService = require("../../services/productService");
+const productTransactionService = require("../../services/productTransaction");
 
 class productController {
   createProduct = (req, res) => {
@@ -43,6 +44,18 @@ class productController {
     const offset = parseInt(req.params.offset);
     let getProductResponse = await productsService.getAllProduct(offset, limit);
     console.log(getProductResponse);
+    return res.status(200).send({
+      message: getProductResponse.message,
+      error: getProductResponse.error,
+      data: getProductResponse.data,
+    });
+  };
+  getTransaction = async (req, res) => {
+    const userId = req.userId;
+    // const limit = parseInt(req.params.limit);
+    // const offset = parseInt(req.params.offset);
+    let getProductResponse =
+      productTransactionService.getTransactionByid(userId);
     return res.status(200).send({
       message: getProductResponse.message,
       error: getProductResponse.error,

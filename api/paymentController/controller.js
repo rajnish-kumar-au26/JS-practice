@@ -1,6 +1,7 @@
 const productService = require("../../services/productService");
 const walletService = require("../../services/walletService");
 const walletTransaction = require("../../services/walletTransactionService");
+const ProductTransactionService = require("../../services/productTransaction");
 
 class PaymentController {
   buyProduct = async (req, res) => {
@@ -13,13 +14,14 @@ class PaymentController {
       }
 
       const productPrice = productInfo.data.price;
-      const walletInfo = await walletService.getById({ userId });
+      const walletInfo = await walletService.getById(userId);
 
       if (walletInfo.error) {
-        throw {
-          ...walletInfo,
-          message: "Failed to purchase the product, Internal error",
-        };
+        // throw {
+        //   ...walletInfo,
+        //   message: "Failed to purchase the product, Internal error",
+        // };
+        throw walletInfo;
       }
 
       const userBalance = walletInfo.data.amount;
@@ -35,10 +37,11 @@ class PaymentController {
       const updateWalletInfo = await walletService.update({ userId, amount });
 
       if (updateWalletInfo.error) {
-        throw {
-          ...updateWalletInfo,
-          message: "Failed to purchase the product, Internal error",
-        };
+        // throw {
+        //   ...updateWalletInfo,
+        //   message: "Failed to purchase the product, Internal error",
+        // };
+        throw updateWalletInfo;
       }
 
       const walletTransactionInfo = await walletTransaction.create({
@@ -49,10 +52,25 @@ class PaymentController {
       });
 
       if (walletTransactionInfo.error) {
-        throw {
-          ...walletTransactionInfo,
-          message: "Failed to purchase the product, Internal error",
-        };
+        // throw {
+        //   ...walletTransactionInfo,
+        //   message: "Failed to purchase the product, Internal error",
+        // };
+        throw walletTransactionInfo;
+      }
+
+      // productTransaction
+      const product = await ProductTransactionService.create({
+        userId,
+        productId,
+      });
+
+      if (product.error) {
+        // throw {
+        //   ...product,
+        //   message: "Failed to purchase the product, Internal error",
+        // };
+        throw product;
       }
 
       return res

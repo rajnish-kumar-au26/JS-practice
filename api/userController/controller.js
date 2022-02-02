@@ -29,11 +29,14 @@ class userController {
         throw userInfo;
       }
 
-      await walletService.create({
-        userdId: userInfo.data.id,
+      const walletRes = await walletService.create({
+        userId: userInfo.data.id,
         amount: 0,
         currency: "INR",
       });
+
+      if (walletRes.error) throw walletRes;
+
       return res.status(registerUser.status).send({
         message: registerUser.message,
         error: registerUser.error,
