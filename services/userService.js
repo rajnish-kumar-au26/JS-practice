@@ -123,7 +123,7 @@ class UserService {
         message: MESSAGES.USERS.LOGIN.SUCCESS,
         status: RESPONSES.SUCCESS,
         error: false,
-        data: { token: token },
+        data: { token: token.data },
       };
     } catch (error) {
       return {
