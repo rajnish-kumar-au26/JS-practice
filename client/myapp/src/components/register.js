@@ -1,9 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
-function Register() {
+function Register({ loggedIn }) {
   const [user, setUser] = useState({});
   const [message, setMessage] = useState("");
+  const [isRegister, SetRegister] = useState(false);
 
   const loginHandler = async () => {
     const apiurl = "http://localhost:4000/user/register";
@@ -14,6 +16,10 @@ function Register() {
 
     setMessage(apiRes.data.message);
 
+    if (!apiRes.data.error) {
+      SetRegister(true);
+    }
+
     // setMessage(apiRes.data.message);
   };
 
@@ -22,6 +28,14 @@ function Register() {
     const value = event.target.value;
     setUser({ ...user, [name]: value });
   };
+
+  if (loggedIn) {
+    return <Navigate to="/" />;
+  }
+
+  if (isRegister) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <div>

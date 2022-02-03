@@ -1,7 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
-function Login() {
+function Login({ loggedIn, setLoggedIn }) {
   const [user, setUser] = useState({});
   const [message, setMessage] = useState("");
   const [token, setToken] = useState("");
@@ -22,6 +23,7 @@ function Login() {
 
     if (!apiRes.data.error) {
       const gotToken = apiRes.data.data.token;
+      setLoggedIn(true);
       setToken(gotToken);
 
       const product = await axios
@@ -56,6 +58,9 @@ function Login() {
     // }
   };
 
+  if (loggedIn) {
+    return <Navigate to="/" />;
+  }
   return (
     <div>
       <h2>Login Page</h2>
