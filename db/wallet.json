@@ -4,5 +4,11 @@
     "amount": 480,
     "currency": "INR",
     "walletId": "c2fd0c57-b54b-4792-b036-dcd51cb47815"
+  },
+  {
+    "userdId": "81e3283a-6891-40ad-bb55-f7c4c48db3b0",
+    "amount": 0,
+    "currency": "INR",
+    "walletId": "e9b56598-01d6-4826-8be2-b74aa0d87873"
   }
 ]
