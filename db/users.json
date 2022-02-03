@@ -1,1 +1,14 @@
-[{"id":"842ed36b-1f4c-48a9-9d77-7b419dcd48db","name":"shubhankar","email":"shubhankar@gmail.com","password":"$2a$10$XilnW/C2Rju2V7r33UIbp./DzLf1PkTTQWVQ1oquurZ4lWHKJyzQi"},{"id":"70fbacaf-e778-43e4-b4d0-a2d92308ef47","name":"shubhankar","email":"shubhankar3@gmail.com","password":"$2a$10$CUzFc1aQMmaF.IVUWqSZQOehCLNkTYs3VXwf4rH355aNkibsGRrzm"}]
+[
+  {
+    "id": "842ed36b-1f4c-48a9-9d77-7b419dcd48db",
+    "name": "shubhankar",
+    "email": "shubhankar@gmail.com",
+    "password": "$2a$10$XilnW/C2Rju2V7r33UIbp./DzLf1PkTTQWVQ1oquurZ4lWHKJyzQi"
+  },
+  {
+    "id": "70fbacaf-e778-43e4-b4d0-a2d92308ef47",
+    "name": "shubhankar",
+    "email": "shubhankar3@gmail.com",
+    "password": "$2a$10$CUzFc1aQMmaF.IVUWqSZQOehCLNkTYs3VXwf4rH355aNkibsGRrzm"
+  }
+]
