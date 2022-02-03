@@ -7,7 +7,7 @@ const MESSAGES = require("../messages/index");
 const RESPONSES = require("../responses/constantResponses");
 
 class walletTransaction {
-  create = ({ status, walletId, transactionAmount, transactionType }) => {
+  create = async ({ status, walletId, transactionAmount, transactionType }) => {
     try {
       const walletTransactionId = v4();
       if (!walletId.length) {
@@ -61,7 +61,12 @@ class walletTransaction {
       };
     }
   };
-  update = ({ status, walletTransactionId, transactionAmount }) => {
+  update = ({
+    status,
+    walletTransactionId,
+    transactionAmount,
+    transactionType,
+  }) => {
     try {
       //   if (!walletId.length) {
       //     throw {
@@ -92,10 +97,11 @@ class walletTransaction {
           error: true,
         };
       }
-      (walletTransactionModel[isTransation].status = status),
-        (walletTransactionModel[isTransation].transactionAmount =
-          transactionAmount),
-        (walletTransactionModel[isTransation].transactionDate = new Date());
+      walletTransactionModel[isTransation].status = status;
+      walletTransactionModel[isTransation].transactionAmount =
+        transactionAmount;
+      walletTransactionModel[isTransation].transactionDate = new Date();
+      walletTransactionModel[isTransation].transactionType = transactionType;
 
       fs.writeFile(reqPath, JSON.stringify(walletTransactionModel), (error) => {
         if (error) {
