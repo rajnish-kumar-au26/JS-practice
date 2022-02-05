@@ -1,8 +1,9 @@
 import Register from "./components/register";
 import Login from "./components/login";
 import Home from "./components/home";
-import { Product } from "./components/product";
+import { ProductList } from "./components/productList";
 import { Navbar } from "./components/Navbar";
+import WalletBalance from "./components/walletBalance";
 // import Counter from "./components/counter";
 
 import { useState } from "react";
@@ -29,7 +30,11 @@ const App = () => {
         />
         <Route path="/register" element={<Register loggedIn={loggedIn} />} />
         <Route path="/" element={<Home />} />
-        <Route path="/product" element={<Product token={token} />} />
+        <Route path="/product-list" element={<ProductList token={token} />} />
+        <Route
+          path="/wallet-balance"
+          element={<WalletBalance token={token} />}
+        />
       </Routes>
     </Router>
   );
