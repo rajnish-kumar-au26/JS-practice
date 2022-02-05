@@ -47,7 +47,6 @@ class WalletService {
           status: 400,
         };
       }
-
       const newWallet = walletModel;
       const userWallet = newWallet.findIndex((wall) => wall.userId == userId);
 

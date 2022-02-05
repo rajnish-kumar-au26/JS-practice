@@ -3,20 +3,21 @@ const walletService = require("../../services/walletService");
 const walletTransactionService = require("../../services/walletTransactionService");
 
 class WalletController {
-  depositService = (req, res) => {
+  depositService = async (req, res) => {
     try {
       const { amount } = req.body;
       const userId = req.userId;
-      const userWallet = walletService.getById(userId);
-      const walletRes = walletService.update({
-        userdId: userId,
+      const userWallet = await walletService.getById(userId);
+      const walletRes = await walletService.update({
+        userId: userId,
         amount: userWallet.data.amount + amount,
         currency: "INR",
       });
       if (walletRes.error) {
         throw walletRes;
       }
-      const walletTransactionRes = walletTransactionService.create({
+
+      const walletTransactionRes = await walletTransactionService.create({
         status: "COMPLETED",
         walletId: userWallet.data.walletId,
         transactionAmount: amount,
@@ -50,7 +51,7 @@ class WalletController {
         };
       }
       const walletRes = walletService.update({
-        userdId: userId,
+        userId: userId,
         amount: userWallet.data.amount - amount,
         currency: "INR",
       });
@@ -78,10 +79,10 @@ class WalletController {
       });
     }
   };
-  getWalletByUserId = (req, res) => {
+  getWalletByUserId = async (req, res) => {
     try {
       const userId = req.userId;
-      const walletRes = walletService.getById(userId);
+      const walletRes = await walletService.getById(userId);
       if (walletRes.error) {
         throw walletRes;
       }
