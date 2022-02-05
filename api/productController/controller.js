@@ -43,7 +43,6 @@ class productController {
     const limit = parseInt(req.params.limit);
     const offset = parseInt(req.params.offset);
     let getProductResponse = await productsService.getAllProduct(offset, limit);
-    console.log(getProductResponse);
     return res.status(200).send({
       message: getProductResponse.message,
       error: getProductResponse.error,
