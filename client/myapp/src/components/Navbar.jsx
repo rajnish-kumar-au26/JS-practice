@@ -33,6 +33,11 @@ export const Navbar = ({ loggedIn }) => {
               Add-Products
             </Link>
           </ul>
+          <ul class="navbar-nav">
+            <Link class="nav-item nav-link" to="/products-card">
+              Products-Card
+            </Link>
+          </ul>
         </div>
         <form class="d-flex">
           <button class="btn btn-outline-success" type="submit">

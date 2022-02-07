@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import ProdcuctCard from './productCard';
 const ProductList = ({ token }) => {
   const [products, setProducts] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
@@ -31,14 +32,23 @@ const ProductList = ({ token }) => {
   const generateTableBody = (data) => {
     return data.map((elem, index) => {
       return (
-        <tr key={index}>
-          <th scope="row">{index + 1}</th>
-          <td>{elem.name}</td>
-          <td>{elem.image}</td>
-          <td>{elem.description}</td>
-          <td>{elem.price}</td>
-          <td>{elem.date}</td>
-        </tr>
+        // <tr key={index}>
+        //   <th scope="row">{index + 1}</th>
+        //   <td>{elem.name}</td>
+        //   <td>{elem.image}</td>
+        //   <td>{elem.description}</td>
+        //   <td>{elem.price}</td>
+        //   <td>{elem.date}</td>
+        // </tr>
+
+        <ProdcuctCard
+          key={index}
+          id={index + 1}
+          name={elem.name}
+          image={elem.image}
+          description={elem.description}
+          price={elem.price}
+        />
       );
     });
   };
@@ -46,7 +56,8 @@ const ProductList = ({ token }) => {
   return (
     <div>
       <section id="main" class=" main section pagetitle">
-        <div class="row">
+        {products?.rows?.length && generateTableBody(products.rows)}
+        {/* <div class="row">
           <div class="col-lg-12">
             <div class="card">
               <div class="card-body">
@@ -70,7 +81,7 @@ const ProductList = ({ token }) => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </section>
     </div>
   );

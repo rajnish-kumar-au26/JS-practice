@@ -5,6 +5,7 @@ import { ProductList } from './components/productList';
 import { Navbar } from './components/Navbar';
 import WalletBalance from './components/walletBalance';
 import CreateProduct from './components/addProduct';
+import ProdcuctCard from './components/productCard';
 // import Counter from "./components/counter";
 
 import { useState } from 'react';
@@ -33,6 +34,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/product-list" element={<ProductList token={token} />} />
         <Route path="/product-add" element={<CreateProduct token={token} />} />
+        <Route path="/products-card" element={<ProdcuctCard token={token} />} />
         <Route
           path="/wallet-balance"
           element={<WalletBalance token={token} />}

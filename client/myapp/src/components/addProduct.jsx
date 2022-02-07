@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 
 function CreateProduct({ token }) {
+  const [message, setMessage] = useState('');
   const [product, setProduct] = useState({
     name: '',
     description: '',
@@ -32,12 +33,13 @@ function CreateProduct({ token }) {
     //   SetRegister(true);
     // }
 
-    // setMessage(apiRes.data.message);
+    setMessage(apiRes.data.message);
   };
 
   return (
     <div class="container mt-5">
       <h1 class="text-center mb-5">Add Products Below Here</h1>
+      <h2>{message}</h2>
       <form>
         <input
           class="form-control"
