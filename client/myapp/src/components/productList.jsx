@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 const ProductList = ({ token }) => {
   const [products, setProducts] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     if (token && !isLoaded) {
@@ -13,7 +13,7 @@ const ProductList = ({ token }) => {
 
   const fetchProducts = async () => {
     const product = await axios
-      .get("http://localhost:4000/product/list/10/1", {
+      .get('http://localhost:4000/product/list/10/1', {
         headers: {
           Authorization: token,
         },

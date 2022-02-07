@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 export const Navbar = ({ loggedIn }) => {
   return (
@@ -28,10 +28,15 @@ export const Navbar = ({ loggedIn }) => {
               Wallet
             </Link>
           </ul>
+          <ul class="navbar-nav">
+            <Link class="nav-item nav-link" to="/product-add">
+              Add-Products
+            </Link>
+          </ul>
         </div>
         <form class="d-flex">
           <button class="btn btn-outline-success" type="submit">
-            {loggedIn ? "Logout" : <Link to="/login">Login</Link>}
+            {loggedIn ? 'Logout' : <Link to="/login">Login</Link>}
           </button>
           {!loggedIn && (
             <button class="btn btn-outline-success" type="submit">
