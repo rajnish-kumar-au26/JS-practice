@@ -206,7 +206,7 @@ class ProductsService {
     }
   };
 
-  getAllProduct = async (offset = 1, limit = 10) => {
+  getAllProduct = async (offset = 1, limit = 8) => {
     try {
       if (!products.length) {
         throw {

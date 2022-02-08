@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProdcuctCard from './productCard';
+// import Pagination from './Pagination';
+import ReactPaginate from 'react-paginate';
+
 const ProductList = ({ token }) => {
   const [products, setProducts] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
@@ -12,9 +15,10 @@ const ProductList = ({ token }) => {
     }
   }, [isLoaded]);
 
-  const fetchProducts = async () => {
+  const fetchProducts = async (offset = 1) => {
+    const data = offset + 1;
     const product = await axios
-      .get('http://localhost:4000/product/list/10/1', {
+      .get('http://localhost:4000/product/list/10/' + data, {
         headers: {
           Authorization: token,
         },
@@ -57,31 +61,22 @@ const ProductList = ({ token }) => {
     <div>
       <section id="main" class=" main section pagetitle">
         {products?.rows?.length && generateTableBody(products.rows)}
-        {/* <div class="row">
-          <div class="col-lg-12">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">{message}</h5>
-
-                <table class="table datatable">
-                  <thead>
-                    <tr>
-                      <th scope="col">id</th>
-                      <th scope="col">name</th>
-                      <th scope="col">image</th>
-                      <th scope="col">description</th>
-                      <th scope="col">price</th>
-                      <th scope="col">date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {products?.rows?.length && generateTableBody(products.rows)}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div> */}
+        <ReactPaginate
+          previousLabel={'<<'}
+          nextLabel={'>>'}
+          breakLabel={'...'}
+          pageCount={products?.count ? products.count : 20}
+          // pageRangeDisplayed={6}
+          onPageChange={(e) => fetchProducts(e.selected)}
+          containerClassName={'pagination justify-content-center'}
+          pageClassName={'page-item'}
+          pageLinkClassName={'page-link'}
+          previousClassName={'page-item'}
+          previousLinkClassName={'page-item'}
+          nextClassName={'page-item'}
+          nextLinkClassName={'page-item'}
+          activeClassName={'active'}
+        />
       </section>
     </div>
   );

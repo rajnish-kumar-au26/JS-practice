@@ -4,10 +4,10 @@ const photoSize = { width: '272px', height: '181px' };
 function ProdcuctCard(props) {
   return (
     <div
-      className="cardBody d-inline-flex p-2 bd-highlight m-2"
+      className="cardBody d-inline-flex p-2 bd-highlight m-2 d-flex justify-content-evenly"
       style={divSize}
     >
-      <div className="card">
+      <div className="card ">
         <img src={props.image} style={photoSize} />
         <div className="card-body card-body-data">
           <h5 className="card-title">{props.name}</h5>
